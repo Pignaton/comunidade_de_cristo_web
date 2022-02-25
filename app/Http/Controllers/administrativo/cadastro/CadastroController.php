@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Http\Controllers\administrativo\cadastro;
+
+use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Routing\Controller as BaseController;
+
+class CadastroController extends BaseController
+{
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function index(Request $request) {
+        echo "registro";
+    }
+}
