@@ -14,11 +14,13 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'name' => 'Admin Admin',
+        DB::table('acesso')->insert([
+            'cod_integrante' => 1,
+            'nome' => 'Kaleb Pignaton',
+            'usuario' => 'kpignaton',
             'email' => 'admin@material.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('123'),
+            'senha' => Hash::make('123'),
+            'nivel' => 2,
             'created_at' => now(),
             'updated_at' => now()
         ]);

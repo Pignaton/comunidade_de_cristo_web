@@ -5,6 +5,8 @@
  */
 
 require('./bootstrap');
+//require('./jquery');
+//require('./viacep');
 
 window.Vue = require('vue').default;
 

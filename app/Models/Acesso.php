@@ -5,24 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Acesso extends Model implements AuthenticatableContract
+class Acesso extends Authenticatable
 {
-    use HasFactory, Notifiable, Authenticatable;
+    use HasFactory, Notifiable;
 
     protected $table = 'acesso';
 
     protected $primaryKey = 'cod_usuario';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+
     protected $fillable = [
-        'nome', 'email', 'password',
+        'nome', 'email', 'senha',
     ];
 
     /**
@@ -31,7 +26,11 @@ class Acesso extends Model implements AuthenticatableContract
      * @var array
      */
     protected $hidden = [
-        'password',
+        'senha',
     ];
 
+    public function getAuthPassword()
+    {
+        return $this->senha;
+    }
 }

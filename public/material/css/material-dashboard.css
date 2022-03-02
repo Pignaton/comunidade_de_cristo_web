@@ -26,7 +26,6 @@
 }
 
 html {
-  font-family: sans-serif;
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
@@ -8865,7 +8864,7 @@ a.text-dark:focus {
 
 .btn.btn-primary.btn-link {
   background-color: transparent;
-  color: #9c27b0;
+  color: #0078D4; /*#9c27b0*/
   box-shadow: none;
 }
 
@@ -8873,7 +8872,7 @@ a.text-dark:focus {
 .btn.btn-primary.btn-link:focus,
 .btn.btn-primary.btn-link:active {
   background-color: transparent;
-  color: #9c27b0;
+  color: #016BBD; /*#9c27b0;*/
 }
 
 .btn.btn-secondary {
@@ -10894,7 +10893,7 @@ fieldset[disabled] .form-group.is-focused .form-check .form-check-label {
 }
 
 .form-check .form-check-input:checked+.form-check-sign .check {
-  background: #9c27b0;
+  background: #0078D4; /*#9c27b0*/
 }
 
 .form-check .form-check-input:checked+.form-check-sign .check:before {
@@ -11358,7 +11357,8 @@ fieldset[disabled] .is-focused .switch label:focus {
 
 .form-control,
 .is-focused .form-control {
-  background-image: linear-gradient(to top, #9c27b0 2px, rgba(156, 39, 176, 0) 2px), linear-gradient(to top, #d2d2d2 1px, rgba(210, 210, 210, 0) 1px);
+  /*background-image: linear-gradient(to top, #9c27b0 2px, rgba(156, 39, 176, 0) 2px), linear-gradient(to top, #d2d2d2 1px, rgba(210, 210, 210, 0) 1px);*/
+    background-image: linear-gradient(to top, #016BBD 2px, rgba(156, 39, 176, 0) 2px), linear-gradient(to top, #d2d2d2 1px, rgba(210, 210, 210, 0) 1px);
 }
 
 .form-control:invalid {
@@ -13149,7 +13149,7 @@ fieldset[disabled] .form-group .form-control {
 
 .navbar .navbar-brand {
   position: relative;
-  color: inherit;
+  color: black;
   height: 50px;
   font-size: 1.125rem;
   line-height: 30px;
@@ -13354,6 +13354,7 @@ fieldset[disabled] .form-group .form-control {
   border-radius: 3px;
   color: #fff;
   margin: 0 15px;
+    background-color:#0078D4;
 }
 
 .off-canvas-sidebar .navbar .navbar-collapse .navbar-nav .nav-item .nav-link:hover {
@@ -13617,6 +13618,7 @@ fieldset[disabled] .form-group .form-control {
 .page-header .container {
   height: 100%;
   z-index: 1;
+    color:black;
 }
 
 .page-header .category,
@@ -13655,7 +13657,8 @@ fieldset[disabled] .form-group .form-control {
 }
 
 .page-header:before {
-  background-color: rgba(0, 0, 0, 0.3);
+  /*background-color: rgba(0, 0, 0, 0.3);*/
+    background-color:#F7F7F7;
 }
 
 html * {
@@ -16309,12 +16312,12 @@ legend {
 }
 
 a {
-  color: #9c27b0;
+  color: #0078D4; /*#9c27b0*/
 }
 
 a:hover,
 a:focus {
-  color: #89229b;
+  color: #016BBD; /*#89229b*/
   text-decoration: none;
 }
 
@@ -16777,7 +16780,8 @@ label {
 .card.bg-primary,
 .card.card-rotate.bg-primary .front,
 .card.card-rotate.bg-primary .back {
-  background: linear-gradient(60deg, #ab47bc, #8e24aa);
+  /*background: linear-gradient(60deg, #ab47bc, #8e24aa);*/
+    background: linear-gradient(60deg, #0078D4, #004d88 );
 }
 
 .card .card-header-info .card-icon,

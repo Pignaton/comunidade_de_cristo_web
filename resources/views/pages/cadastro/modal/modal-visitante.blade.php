@@ -1,0 +1,84 @@
+<div class="modal fade" id="modalVisitante{{$pessoa->cod_pessoa}}" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Informações do Visitante</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="nome">Nome</label>
+                        <input type="text" class="form-control" id="nome" value="{{$pessoa->nome}}" readonly>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="idade">Idade</label>
+                        <input type="text" class="form-control" id="idade" value="{{$pessoa->idade}}" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" value="{{$pessoa->email}}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="telefone">Telefone</label>
+                    <input type="text" class="form-control" id="telefone" value="{{$pessoa->telefone}}" readonly>
+                </div>
+                <div class="row">
+                    <div class="bmd-form-group col-md-4">
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" id="masculino"
+                                       name="sexo" value="M" @if($pessoa->sexo === 'M') checked @endif >
+                                <span class="form-check-sign">
+                                      <span class="check"></span>
+                                    </span>
+                                {{ __('Masculino') }}
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline mr-auto ml-3 mt-3">
+                            <label class="form-check-label ml-3">
+                                <input class="form-check-input" type="checkbox" id="feminino"
+                                       name="sexo" value="F" @if($pessoa->sexo === 'F') checked @endif>
+                                <span class="form-check-sign">
+                                      <span class="check"></span>
+                                    </span>
+                                {{ __('Feminino') }}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3 form-check-inline">
+                        <label for="estadocivil">Estado Civil</label>
+                        <select name="estadocivil" id="estadocivil" class="form-control" readonly>
+                            <option value="I" @if($pessoa->estado_civil === 'I') selected @endif >Não identificado</option>
+                            <option value="S" @if($pessoa->estado_civil === 'S') selected @endif>Solteiro</option>
+                            <option value="C" @if($pessoa->estado_civil === 'C') selected @endif>Casado</option>
+                            <option value="V" @if($pessoa->estado_civil === 'V') selected @endif>Viúva</option>
+                            <option value="A" @if($pessoa->estado_civil === 'A') selected @endif>Separado</option>
+                            <option value="D" @if($pessoa->estado_civil === 'D') selected @endif>Divorciado</option>
+                            <option value="N" @if($pessoa->estado_civil === 'N') selected @endif>Namorando</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12" readonly>
+                        <label for="endereco">Endereço</label>
+                        <input type="text" class="form-control" id="endereco"
+                               @if ($pessoa->cep !== null)
+                               value="{{$pessoa->endereco . ', ' . $pessoa->numero . ' - ' . $pessoa->bairro . ', ' .
+                                        $pessoa->cidade . ' - ' . $pessoa->estado . ' - ' . $pessoa->complemento }}" @else value="Não Informado" @endif readonly>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
