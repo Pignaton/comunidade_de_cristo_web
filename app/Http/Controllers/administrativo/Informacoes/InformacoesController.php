@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Administrativo\Informacoes;
 
+use App\Http\Requests\AcessoRequest;
 use App\Models\Acesso;
 use App\Models\Integrante;
 use App\Models\Pessoa;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 
+
 class InformacoesController extends BaseController
 {
 
@@ -26,13 +28,20 @@ class InformacoesController extends BaseController
     public function visitantes()
     {
         $pessoas = Pessoa::enderecoPessoa();
-        return view('pages/cadastro/visitante', ['pessoas' => $pessoas]);
+
+        return view('pages/cadastro/visitantes/visitante', ['pessoas' => $pessoas]);
     }
 
     public function integrantes()
     {
         $integrantes = Integrante::enderecoIntegrante();
         return view('pages/cadastro/integrante', ['integrantes' => $integrantes]);
+    }
+
+    public function informacaoVisitante($cod_pessoa)
+    {
+        $pessoas = Pessoa::enderecoPessoa($cod_pessoa);
+        return view('pages/cadastro/visitantes/informacao-visitante', ['pessoas' => $pessoas]);
     }
 
     public function acesso()
@@ -43,5 +52,68 @@ class InformacoesController extends BaseController
             'acessos' => $acessos,
             'integrantes' => $integrantes
         ]);
+    }
+
+    public function criaAcesso(AcessoRequest $request)
+    {
+        if ($request->fails()) {
+            return redirect('/acesso')
+                ->withErrors($request)
+                ->withInput();
+        }
+
+        $senha_hash = Hash::make('Comunidade123');
+
+        //cria o usuário
+        $nomeSobrenome = explode(' ', $request->nome);
+        $rest = substr($nomeSobrenome[0], 0, 1);
+        $nomeCompleto = $rest.$nomeSobrenome[1];
+        $usuario = strtolower($nomeCompleto);
+
+
+        $acesso = new Acesso();
+        $acesso->cod_integrante = $request->cod_integrante;
+        $acesso->nome = $request->nome;
+        $acesso->usuario = $usuario;
+        $acesso->email = $request->email;
+        $acesso->senha = $senha_hash;
+        $acesso->nivel = $request->nivel;
+        $acesso->save();
+
+        return redirect('/acesso')->with('sucesso', 'usuário criado com sucesso');
+    }
+
+    protected function editaVisitante(Request $request)
+    {
+
+        $pessoa = Pessoa::find($request->cod_pessoa);
+        $pessoa->nome = $request->nome;
+        $pessoa->idade = $request->idade;
+        $pessoa->email = $request->email;
+        $pessoa->telefone = $request->telefone;
+        $pessoa->sexo = $request->sexo;
+        $pessoa->estado_civil = $request->estado_civil;
+        $pessoa->save();
+
+        if (!empty($request->cep) || !empty($request->bairro)) {
+            Endereco::where('cod_pessoa', $request->cod_pessoa)
+                ->update([
+                    'cep' => $request->cep,
+                    'endereco' => $request->endereco,
+                    'bairro' => $request->bairro,
+                    'numero' => $request->numero,
+                    'complemento' => $request->complemento,
+                    'cidade' => $request->cidade,
+                    'estado' => $request->estado,
+                ]);
+        }
+        return redirect()->route('visitantes')->with('sucesso', 'Visitante alterado com sucesso');
+    }
+
+    protected function desativaVisitante(Request $request)
+    {
+        Pessoa::where('cod_pessoa', $request->cod_pessoa)
+            ->delete();
+        return redirect()->route('visitantes');
     }
 }

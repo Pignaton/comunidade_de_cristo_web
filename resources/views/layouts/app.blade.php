@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- CSS Files -->
     <link href="{{ asset('material') }}/css/material-dashboard.css?v=2.1.1" rel="stylesheet"/>
+    <link href="{{ asset('assets') }}/css/app.css" rel="stylesheet"/>
     <!-- CSS DataTable -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 
@@ -117,6 +118,7 @@
 <script src="{{ asset('material') }}/js/core/popper.min.js"></script>
 <script src="{{ asset('material') }}/js/core/bootstrap-material-design.min.js"></script>
 <script src="{{ asset('material') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+
 <!-- Plugin for the momentJs  -->
 <script src="{{ asset('material') }}/js/plugins/moment.min.js"></script>
 <!--  Plugin for Sweet Alert -->
@@ -153,11 +155,12 @@
 <script src="{{ asset('material') }}/js/plugins/bootstrap-notify.js"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{ asset('material') }}/js/material-dashboard.js?v=2.1.1" type="text/javascript"></script>
+<!-- Script do projeto -->
+<script src="{{ asset('assets') }}/js/app.js"></script>
 
 @stack('js')
-<!-- Script do projeto -->
-<script src="{{ asset('assets') }}/js/viacep.js"></script>
-<script src="{{ asset('assets') }}/js/script.js"></script>
+
+@yield('modal')
 
 @if($errors->has('nomeCulto') || $errors->has('diaCulto') )
     <script>
@@ -173,6 +176,13 @@
         });
     </script>
 @endif
+@if($errors->any())
+    <script>
+        $(document).ready(function () {
+            $('#modalCriaAcesso').modal({show: true});
+        });
+    </script>
+@endif;
 
 </body>
 </html>

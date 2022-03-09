@@ -71,6 +71,7 @@ class ConfiguracoesController extends BaseController
         return redirect('/configuracoes-de-cadastro')->with('campanha', 'Campanha adicionada com sucesso');
     }
 
+
     //Exibe ou não o campo culto ou campanha no cadastro
     protected function toggle(Request $request)
     {

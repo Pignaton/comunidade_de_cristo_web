@@ -11,6 +11,11 @@ class Endereco extends Model
 
     protected $table = 'endereco';
     protected $primaryKey = 'cod_endereco';
+    protected $hidden = [
+        'cod_endereco',
+        'cod_pessoa'
+    ];
+
     public $timestamps = true;
 
 }

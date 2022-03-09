@@ -562,7 +562,7 @@ sup {
 }
 
 a {
-  color: #9c27b0;
+  color: #0078D4/*#9c27b0*/;
   text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
@@ -11018,7 +11018,7 @@ fieldset[disabled] .form-group.is-focused .form-check .form-check-label {
   height: 15px;
   width: 15px;
   border-radius: 100%;
-  background-color: #9c27b0;
+  background-color: #0078D4; /*#9c27b0*/
   -webkit-transform: scale3d(0, 0, 0);
   -moz-transform: scale3d(0, 0, 0);
   -o-transform: scale3d(0, 0, 0);
@@ -11039,11 +11039,11 @@ fieldset[disabled] .form-group.is-focused .form-check .form-check-label {
 }
 
 .form-check .form-check-input:checked~.check {
-  background-color: #9c27b0;
+  background-color: #0078D4 /*#9c27b0*/;
 }
 
 .form-check .form-check-input:checked~.circle {
-  border-color: #9c27b0;
+  border-color: #0078D4 /*#9c27b0*/;
 }
 
 .form-check .form-check-input:checked .check:before {
@@ -11505,7 +11505,7 @@ fieldset[disabled][disabled] .form-control,
 
 .is-focused [class^='bmd-label'],
 .is-focused [class*=' bmd-label'] {
-  color: #9c27b0;
+  color: #0078D4 /*#9c27b0*/;
 }
 
 .is-focused .bmd-label-placeholder {
@@ -13658,7 +13658,7 @@ fieldset[disabled] .form-group .form-control {
 
 .page-header:before {
   /*background-color: rgba(0, 0, 0, 0.3);*/
-    background-color:#F7F7F7;
+    background-color:#ECECEC;
 }
 
 html * {
@@ -14312,11 +14312,11 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 }
 
 .togglebutton label input[type=checkbox]:checked+.toggle {
-  background-color: rgba(156, 39, 176, 0.7);
+  background-color:  rgba(0, 120, 212, 0.7); /*rgba(156, 39, 176, 0.7)*/
 }
 
 .togglebutton label input[type=checkbox]:checked+.toggle:after {
-  border-color: #9c27b0;
+  border-color: #0078D4 /*#9c27b0*/;
 }
 
 .togglebutton label input[type=checkbox]:checked+.toggle:active:after {

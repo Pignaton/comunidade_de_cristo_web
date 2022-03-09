@@ -14,10 +14,18 @@ class Pessoa extends Model
     protected $primaryKey = 'cod_pessoa';
     public $timestamps = true;
 
-    public function enderecoPessoa()
+    public function enderecoPessoa($cod_pessoa = null)
     {
-        return DB::table('pessoa as p')
-            ->leftJoin('endereco as e', 'p.cod_pessoa', '=', 'e.cod_pessoa')
-            ->get();
+
+        $query = DB::table('pessoa as p');
+        $query->leftJoin('endereco as e', 'p.cod_pessoa', '=', 'e.cod_pessoa');
+        if (!empty($cod_pessoa)) {
+            $query->where('p.cod_pessoa', $cod_pessoa);
+            $resul = $query->first();
+        } else {
+            $resul = $query->get();
+        }
+
+        return $resul;
     }
 }

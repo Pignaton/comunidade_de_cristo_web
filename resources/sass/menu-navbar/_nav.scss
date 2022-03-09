@@ -1,0 +1,80 @@
+@import "media-query";
+
+$none: none;
+@mixin dropdown-menu {
+    position: static;
+    float: none;
+    width: auto;
+    margin-top: 0;
+    background-color: transparent;
+    border: 0;
+    -webkit-box-shadow: $none;
+    box-shadow: $none;
+}
+
+@mixin dropdown {
+    display: none;
+    position: static !important;
+    background-color: transparent;
+    width: auto;
+    float: $none;
+    box-shadow: $none;
+}
+
+@mixin dropdown-show {
+    display: block;
+}
+
+@mixin dropdown-mwnu-showing {
+    animation: initial;
+    animation-duration: 0s;
+}
+
+@mixin dropdown-menu-hiding {
+    transform: $none;
+    opacity: 1;
+}
+
+@mixin nav-mobile-menu {
+    #dropdown-nav .dropdown-menu {
+        @include dropdown-menu;
+    }
+    #dropdown-nav .dropdown .dropdown-menu {
+        @include dropdown;
+    }
+    #dropdown-nav .dropdown.show .dropdown-menu {
+        @include dropdown-show;
+    }
+    #dropdown-nav .dropdown .dropdown-menu.showing {
+        @include dropdown-mwnu-showing
+    }
+    #dropdown-nav .dropdown .dropdown-menu.hiding {
+        @include dropdown-menu-hiding;
+    }
+}
+
+
+@include for-phone-only {
+    @include nav-mobile-menu;
+}
+
+@include for-tablet-portrait-up {
+    @include nav-mobile-menu;
+}
+
+@include for-tablet-landscape-up {
+    @include nav-mobile-menu;
+}
+
+@include for-desktop-up {
+    #dropdown-nav .dropdown {
+        display: none;
+    }
+}
+
+@include for-bif-desktop-up {
+    #dropdown-nav .dropdown {
+        display: none;
+    }
+}
+

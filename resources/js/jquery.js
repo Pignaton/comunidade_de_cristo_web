@@ -1,7 +1,7 @@
 //window._ = require('lodash');
 
 try {
-    require('jquery.step/jquery.step');
+    require('jquery.steps/dist/jquery-steps');
 } catch (e) {}
 
 //window.axios = require('axios');

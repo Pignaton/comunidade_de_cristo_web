@@ -205,135 +205,136 @@
                                     </div>
                                 @endif
                             @endforeach
-                        </div>
 
-                        <div class="card-login card-hidden mb-3 mt-4">
-                            <div class="card-header card-header-primary text-center">
-                                <h4 class="card-title"><strong>{{ __('Endereço') }}</strong></h4>
-                                <div class="social-line">
 
+                            <div class="card-login card-hidden mb-3 mt-4">
+                                <div class="card-header card-header-primary text-center">
+                                    <h4 class="card-title"><strong>{{ __('Endereço') }}</strong></h4>
+                                    <div class="social-line">
+
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="bmd-form-group{{ $errors->has('cep') ? ' has-danger' : '' }} mt-3">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
+                            <div class="bmd-form-group{{ $errors->has('cep') ? ' has-danger' : '' }} mt-3">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
                                       <span class="input-group-text">
                                           <i class="material-icons">code</i>
                                       </span>
+                                    </div>
+                                    <input type="text" name="cep" class="form-control" id="cep"
+                                           placeholder="{{ __('Cep...') }}" value="{{ old('cep') }}">
                                 </div>
-                                <input type="text" name="cep" class="form-control" id="cep"
-                                       placeholder="{{ __('Cep...') }}" value="{{ old('cep') }}">
+                                @if ($errors->has('cep'))
+                                    <div id="cep-error" class="error text-danger pl-3" for="cep"
+                                         style="display: block;">
+                                        <strong>{{ $errors->first('cep') }}</strong>
+                                    </div>
+                                @endif
                             </div>
-                            @if ($errors->has('cep'))
-                                <div id="cep-error" class="error text-danger pl-3" for="cep"
-                                     style="display: block;">
-                                    <strong>{{ $errors->first('cep') }}</strong>
-                                </div>
-                            @endif
-                        </div>
-                        <div class="bmd-form-group{{ $errors->has('endereco') ? ' has-danger' : '' }} mt-3">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
+                            <div class="bmd-form-group{{ $errors->has('endereco') ? ' has-danger' : '' }} mt-3">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
                                       <span class="input-group-text">
                                           <i class="material-icons">home</i>
                                       </span>
+                                    </div>
+                                    <input type="text" name="endereco" class="form-control" id="endereco"
+                                           placeholder="{{ __('Endereco...') }}" value="{{ old('endereco') }}">
                                 </div>
-                                <input type="text" name="endereco" class="form-control" id="endereco"
-                                       placeholder="{{ __('Endereco...') }}" value="{{ old('endereco') }}">
+                                @if ($errors->has('endereco'))
+                                    <div id="endereco-error" class="error text-danger pl-3" for="endereco"
+                                         style="display: block;">
+                                        <strong>{{ $errors->first('endereco') }}</strong>
+                                    </div>
+                                @endif
                             </div>
-                            @if ($errors->has('endereco'))
-                                <div id="endereco-error" class="error text-danger pl-3" for="endereco"
-                                     style="display: block;">
-                                    <strong>{{ $errors->first('endereco') }}</strong>
-                                </div>
-                            @endif
-                        </div>
-                        <div class="bmd-form-group{{ $errors->has('bairro') ? ' has-danger' : '' }} mt-3">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
+                            <div class="bmd-form-group{{ $errors->has('bairro') ? ' has-danger' : '' }} mt-3">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
                                       <span class="input-group-text">
                                           <i class="material-icons">face</i>
                                       </span>
+                                    </div>
+                                    <input type="text" name="bairro" class="form-control" id="bairro"
+                                           placeholder="{{ __('Bairro...') }}" value="{{ old('bairro') }}">
                                 </div>
-                                <input type="text" name="bairro" class="form-control" id="bairro"
-                                       placeholder="{{ __('Bairro...') }}" value="{{ old('bairro') }}">
+                                @if ($errors->has('bairro'))
+                                    <div id="bairro-error" class="error text-danger pl-3" for="bairro"
+                                         style="display: block;">
+                                        <strong>{{ $errors->first('bairro') }}</strong>
+                                    </div>
+                                @endif
                             </div>
-                            @if ($errors->has('bairro'))
-                                <div id="bairro-error" class="error text-danger pl-3" for="bairro"
-                                     style="display: block;">
-                                    <strong>{{ $errors->first('bairro') }}</strong>
-                                </div>
-                            @endif
-                        </div>
-                        <div class="bmd-form-group{{ $errors->has('numero') ? ' has-danger' : '' }} mt-3">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
+                            <div class="bmd-form-group{{ $errors->has('numero') ? ' has-danger' : '' }} mt-3">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
                                       <span class="input-group-text">
                                           <i class="material-icons">numbers</i>
                                       </span>
+                                    </div>
+                                    <input type="text" name="numero" class="form-control" id="numero"
+                                           placeholder="{{ __('Numero...') }}" value="{{ old('numero') }}">
                                 </div>
-                                <input type="text" name="numero" class="form-control" id="numero"
-                                       placeholder="{{ __('Numero...') }}" value="{{ old('numero') }}">
+                                @if ($errors->has('numero'))
+                                    <div id="numero-error" class="error text-danger pl-3" for="numero"
+                                         style="display: block;">
+                                        <strong>{{ $errors->first('numero') }}</strong>
+                                    </div>
+                                @endif
                             </div>
-                            @if ($errors->has('numero'))
-                                <div id="numero-error" class="error text-danger pl-3" for="numero"
-                                     style="display: block;">
-                                    <strong>{{ $errors->first('numero') }}</strong>
-                                </div>
-                            @endif
-                        </div>
-                        <div class="bmd-form-group{{ $errors->has('complemento') ? ' has-danger' : '' }} mt-3">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
+                            <div class="bmd-form-group{{ $errors->has('complemento') ? ' has-danger' : '' }} mt-3">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
                                       <span class="input-group-text">
                                           <i class="material-icons">store</i>
                                       </span>
+                                    </div>
+                                    <input type="text" name="complemento" class="form-control" id="complemento"
+                                           placeholder="{{ __('Complemento...') }}" value="{{ old('complemento') }}">
                                 </div>
-                                <input type="text" name="complemento" class="form-control" id="complemento"
-                                       placeholder="{{ __('Complemento...') }}" value="{{ old('complemento') }}">
+                                @if ($errors->has('complemento'))
+                                    <div id="complemento-error" class="error text-danger pl-3" for="complemento"
+                                         style="display: block;">
+                                        <strong>{{ $errors->first('complemento') }}</strong>
+                                    </div>
+                                @endif
                             </div>
-                            @if ($errors->has('complemento'))
-                                <div id="complemento-error" class="error text-danger pl-3" for="complemento"
-                                     style="display: block;">
-                                    <strong>{{ $errors->first('complemento') }}</strong>
-                                </div>
-                            @endif
-                        </div>
-                        <div class="bmd-form-group{{ $errors->has('cidade') ? ' has-danger' : '' }} mt-3">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
+                            <div class="bmd-form-group{{ $errors->has('cidade') ? ' has-danger' : '' }} mt-3">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
                                       <span class="input-group-text">
                                           <i class="material-icons">location_city</i>
                                       </span>
+                                    </div>
+                                    <input type="text" name="cidade" class="form-control" id="cidade"
+                                           placeholder="{{ __('Cidade...') }}" value="">
                                 </div>
-                                <input type="text" name="cidade" class="form-control" id="cidade"
-                                       placeholder="{{ __('Cidade...') }}" value="">
+                                @if ($errors->has('cidade'))
+                                    <div id="cidade-error" class="error text-danger pl-3" for="cidade"
+                                         style="display: block;">
+                                        <strong>{{ $errors->first('cidade') }}</strong>
+                                    </div>
+                                @endif
                             </div>
-                            @if ($errors->has('cidade'))
-                                <div id="cidade-error" class="error text-danger pl-3" for="cidade"
-                                     style="display: block;">
-                                    <strong>{{ $errors->first('cidade') }}</strong>
-                                </div>
-                            @endif
-                        </div>
-                        <div class="bmd-form-group{{ $errors->has('estado') ? ' has-danger' : '' }} mt-3">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
+                            <div class="bmd-form-group{{ $errors->has('estado') ? ' has-danger' : '' }} mt-3">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
                                       <span class="input-group-text">
                                           <i class="material-icons">location_city</i>
                                       </span>
+                                    </div>
+                                    <input type="text" name="estado" class="form-control" id="estado"
+                                           placeholder="{{ __('Estado...') }}" value="{{ old('estado') }}">
                                 </div>
-                                <input type="text" name="estado" class="form-control" id="estado"
-                                       placeholder="{{ __('Estado...') }}" value="{{ old('estado') }}">
+                                @if ($errors->has('estado'))
+                                    <div id="estado-error" class="error text-danger pl-3" for="estado"
+                                         style="display: block;">
+                                        <strong>{{ $errors->first('estado') }}</strong>
+                                    </div>
+                                @endif
                             </div>
-                            @if ($errors->has('estado'))
-                                <div id="estado-error" class="error text-danger pl-3" for="estado"
-                                     style="display: block;">
-                                    <strong>{{ $errors->first('estado') }}</strong>
-                                </div>
-                            @endif
                         </div>
                         <div class="card-footer justify-content-center">
                             <button type="submit"
