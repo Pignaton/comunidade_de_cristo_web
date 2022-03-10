@@ -67,7 +67,7 @@
                                                 <div class="ripple-container"></div>
                                             </button>
                                             <button type="button" rel="tooltip" class="btn btn-danger"
-                                                    data-original-title="Deletar" title="Deletar" onclick="desativaVisitante2(1)">
+                                                    data-original-title="Deletar" title="Deletar" onclick="desativaVisitante({{$pessoa->cod_pessoa}})">
                                                 <i class="material-icons">close</i>
                                                 <div class="ripple-container"></div>
                                             </button>

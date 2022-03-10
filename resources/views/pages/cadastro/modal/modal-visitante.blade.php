@@ -54,7 +54,7 @@
                         </div>
                         <div class="form-group col-md-6 form-inline">
                             <label for="estadocivil" class="ml-3 mr-2">Estado Civil</label>
-                            <select name="estadocivil" id="estadocivil" class="selectpicker">
+                            <select name="estadocivil" id="estadocivil" class="form-control">
                                 <option value="I" @if($pessoa->estado_civil === 'I') selected @endif >Não identificado
                                 </option>
                                 <option value="S" @if($pessoa->estado_civil === 'S') selected @endif>Solteiro</option>

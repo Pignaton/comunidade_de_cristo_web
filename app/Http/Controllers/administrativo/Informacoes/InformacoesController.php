@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Administrativo\Informacoes;
 
+use App\Mail\EmailAcesso;
 use App\Http\Requests\AcessoRequest;
 use App\Models\Acesso;
 use App\Models\Integrante;
@@ -14,6 +15,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 
 
 
@@ -56,11 +58,8 @@ class InformacoesController extends BaseController
 
     public function criaAcesso(AcessoRequest $request)
     {
-        if ($request->fails()) {
-            return redirect('/acesso')
-                ->withErrors($request)
-                ->withInput();
-        }
+
+        $request->validated();
 
         $senha_hash = Hash::make('Comunidade123');
 
@@ -71,14 +70,16 @@ class InformacoesController extends BaseController
         $usuario = strtolower($nomeCompleto);
 
 
-        $acesso = new Acesso();
-        $acesso->cod_integrante = $request->cod_integrante;
-        $acesso->nome = $request->nome;
-        $acesso->usuario = $usuario;
-        $acesso->email = $request->email;
-        $acesso->senha = $senha_hash;
-        $acesso->nivel = $request->nivel;
-        $acesso->save();
+        /* $acesso = new Acesso();
+         $acesso->cod_integrante = $request->cod_integrante;
+         $acesso->nome = $request->nome;
+         $acesso->usuario = $usuario;
+         $acesso->email = $request->email;
+         $acesso->senha = $senha_hash;
+         $acesso->nivel = $request->nivel;
+         $acesso->save();*/
+
+        Mail::to($request->email)->locale('pt')->send(new EmailAcesso($request->nome));
 
         return redirect('/acesso')->with('sucesso', 'usuário criado com sucesso');
     }

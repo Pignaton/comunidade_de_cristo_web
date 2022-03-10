@@ -121,6 +121,12 @@ class ConfiguracoesController extends BaseController
         $culto->delete();
     }
 
+    public function deleteCampanha(Request $request){
+        $request->cod_campanha;
+        $campanha = Campanha::find($request->cod_campanha);
+        $campanha->delete();
+    }
+
     protected function validador($data)
     {
         return Validator::make($data, [

@@ -162,7 +162,7 @@
                                                 <div class="ripple-container"></div>
                                             </button>
                                             <button type="button" rel="tooltip" class="btn btn-danger"
-                                                    data-original-title="Deletar" title="Deletar">
+                                                    data-original-title="Deletar" title="Deletar" onclick="deletaCampanha({{$campanha->cod_campanha}})">
                                                 <i class="material-icons">close</i>
                                                 <div class="ripple-container"></div>
                                             </button>
