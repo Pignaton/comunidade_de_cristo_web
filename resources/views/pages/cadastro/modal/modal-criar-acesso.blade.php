@@ -70,7 +70,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row text-center pb-3">
+                    <div class="row text-center text-danger mt-3">
                         <div class="col">
                             <small>Ao criar o usuário, o sistema ira gerar uma senha padrão/ SENHA:
                                 Comunidade123</small>

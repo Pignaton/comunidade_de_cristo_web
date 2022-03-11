@@ -70,18 +70,31 @@ class InformacoesController extends BaseController
         $usuario = strtolower($nomeCompleto);
 
 
-        /* $acesso = new Acesso();
+         $acesso = new Acesso();
          $acesso->cod_integrante = $request->cod_integrante;
          $acesso->nome = $request->nome;
          $acesso->usuario = $usuario;
          $acesso->email = $request->email;
          $acesso->senha = $senha_hash;
          $acesso->nivel = $request->nivel;
-         $acesso->save();*/
+         $acesso->save();
 
-        Mail::to($request->email)->locale('pt')->send(new EmailAcesso($request->nome));
+        //Informações do usuário para enviar o email
+        $contato = [
+            'titulo' => 'Acesso Liberado',
+            'nome' => $request->nome,
+            'email' => $request->email
+        ];
+
+        Mail::to($request->email)->locale('pt')->send(new EmailAcesso($contato));
 
         return redirect('/acesso')->with('sucesso', 'usuário criado com sucesso');
+    }
+
+    public function deletaUsuario(Request $request){
+        Acesso::where('cod_usuario', $request->cod_usuario)
+            ->delete();
+        return redirect()->route('acesso');
     }
 
     protected function editaVisitante(Request $request)
@@ -109,6 +122,23 @@ class InformacoesController extends BaseController
                 ]);
         }
         return redirect()->route('visitantes')->with('sucesso', 'Visitante alterado com sucesso');
+    }
+
+    //Desativa o acesso do usuário
+    protected function toggle(Request $request)
+    {
+        $cod_usuario = $request->input('cod_usuario');
+        $status = $request->input('status');
+
+        if ($status === 'true') {
+            $status = 'A';
+        } else {
+            $status = 'I';
+        }
+
+        $sistema = Acesso::where('cod_usuario', $cod_usuario)->update(['status' => $status]);
+        return $sistema;
+
     }
 
     protected function desativaVisitante(Request $request)

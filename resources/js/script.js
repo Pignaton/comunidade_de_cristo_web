@@ -3,7 +3,24 @@ $(document).ready(function () {
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json",
         },
-        responsive: true
+        //"scrollX": '600',
+        //"scrollY": 'auto',
+        //orderCellsTop: true,
+        //fixedHeader: true,
+        //autoWidth: true,
+        /*rowReorder: {
+            selector: 'td:nth-child(2)',
+        },*/
+        responsive: {
+            details: {
+                type: 'column'
+            }
+        },
+        columnDefs: [ {
+            className: 'dtr-control',
+            orderable: false,
+            targets:   0
+        } ],
     });
 });
 
@@ -44,4 +61,5 @@ $("#toggleCampanha").change(function () {
         }
     })
 });
+
 

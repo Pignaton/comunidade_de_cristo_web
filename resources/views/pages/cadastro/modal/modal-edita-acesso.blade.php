@@ -8,7 +8,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="form-row">
+                <div class="form-row" id="testedoteste">
+                    <input type="hidden" data-codusuario="{{$acesso->cod_usuario}}" id="cod_usuario" class="cod_usuario" value="{{$acesso->cod_usuario}}">
                     <div class="form-group col-md-6">
                         <label for="idade">Nivel de Acesso</label>
                         <select class="form-control" id="nivelAcesso">
@@ -22,9 +23,10 @@
                     <div class="form-group col-md-6">
                         <div class="togglebutton">
                             <label>
-                                <input type="checkbox" @if($acesso->status === 'A') checked @endif>
+                                <input type="checkbox" name="toggleUsuario" data-usuario="{{$acesso->cod_usuario}}"
+                                       @if($acesso->status === 'A') checked @endif>
                                 <span class="toggle"></span>
-                                Ativar ou Desativar Usuário
+                                <p class="text-dark">Ativar ou Desativar Usuário</p>
                             </label>
                         </div>
                     </div>
@@ -40,5 +42,3 @@
         </div>
     </div>
 </div>
-
-

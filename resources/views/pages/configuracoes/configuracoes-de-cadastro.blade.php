@@ -32,18 +32,19 @@
                                 </button>
                                 @foreach($statusCampo as $status)
                                     @if($status->nom_campo === 'culto')
-                                        <div class="togglebutton">
+                                        <div class="togglebutton" rel="tooltip"
+                                             data-bs-original-title="Exibe culto no formulario cadastro"
+                                             title="Exibe culto no formulario cadastro">
                                             <label>
                                                 <input type="checkbox" id="toggleCulto"
                                                        @if($status->status === '1') checked @endif >
                                                 <span class="toggle"></span>
-                                                Exibir culto no formulario de cadastro
                                             </label>
                                         </div>
                                     @endif
                                 @endforeach
                             </div>
-                            <table class="table" id="tableculto">
+                            <table class="table">
                                 <thead>
                                 <tr>
                                     <th class="text-center">Nome do culto</th>
@@ -69,8 +70,9 @@
                                             @endswitch
                                         </td>
                                         <td class="td-actions text-right justify-content-between">
-                                           <button type="button" rel="tooltip" class="btn btn-info"
-                                                    data-original-title="Desativa ou ativa Culto" title="Desativa ou ativa Culto"
+                                            <button type="button" rel="tooltip" class="btn btn-info"
+                                                    data-original-title="Desativa ou ativa Culto"
+                                                    title="Desativa ou ativa Culto"
                                                     onclick="desativaeAtivaCulto({{$culto->cod_culto}}, '{{$culto->status}}')">
                                                 <i class="material-icons">disabled_visible</i>
                                                 <div class="ripple-container"></div>
@@ -83,7 +85,8 @@
                                                 <div class="ripple-container"></div>
                                             </button>
                                             <button type="button" rel="tooltip" class="btn btn-danger"
-                                                    data-original-title="Deletar" title="Deletar" onclick="deletaCulto({{$culto->cod_culto}})">
+                                                    data-original-title="Deletar" title="Deletar"
+                                                    onclick="deletaCulto({{$culto->cod_culto}})">
                                                 <i class="material-icons">close</i>
                                                 <div class="ripple-container"></div>
                                             </button>
@@ -111,12 +114,13 @@
                                 </button>
                                 @foreach($statusCampo as $status)
                                     @if($status->nom_campo === 'campanha')
-                                        <div class="togglebutton">
+                                        <div class="togglebutton" rel="tooltip"
+                                             data-bs-original-title="Exibe campanha no formulario cadastro"
+                                             title="Exibe campanha no formulario cadastro">
                                             <label>
                                                 <input type="checkbox" id="toggleCampanha"
                                                        @if($status->status === '1') checked @endif>
                                                 <span class="toggle"></span>
-                                                Exibir culto no formulario de cadastro
                                             </label>
                                         </div>
                                     @endif
@@ -125,7 +129,6 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th class="text-center">Código Culto</th>
                                     <th>Nome da Campanha</th>
                                     <th>Criado em</th>
                                     <th>Status</th>
@@ -135,7 +138,6 @@
                                 <tbody>
                                 @foreach($campanhas as $campanha)
                                     <tr>
-                                        <td class="text-center">{{$campanha->cod_culto}}</td>
                                         <td>{{$campanha->nom_campanha}}</td>
                                         <td>{{convertDataBR($campanha->created_at)}}</td>
                                         <td>@switch($campanha->status)
@@ -149,7 +151,8 @@
                                         </td>
                                         <td class="td-actions text-right">
                                             <button type="button" rel="tooltip" class="btn btn-info"
-                                                    data-original-title="Desativa ou ativa Culto" title="Desativa ou ativa Culto"
+                                                    data-original-title="Desativa ou ativa Culto"
+                                                    title="Desativa ou ativa Culto"
                                                     onclick="desativaeAtivaCampanha({{$campanha->cod_campanha}}, '{{$campanha->status}}')">
                                                 <i class="material-icons">disabled_visible</i>
                                                 <div class="ripple-container"></div>
@@ -162,7 +165,8 @@
                                                 <div class="ripple-container"></div>
                                             </button>
                                             <button type="button" rel="tooltip" class="btn btn-danger"
-                                                    data-original-title="Deletar" title="Deletar" onclick="deletaCampanha({{$campanha->cod_campanha}})">
+                                                    data-original-title="Deletar" title="Deletar"
+                                                    onclick="deletaCampanha({{$campanha->cod_campanha}})">
                                                 <i class="material-icons">close</i>
                                                 <div class="ripple-container"></div>
                                             </button>
@@ -178,6 +182,8 @@
             </div>
         </div>
     </div>
+@endsection
+@section('modal')
     @include('pages/configuracoes/modal/modal-cria-culto')
     @include('pages/configuracoes/modal/modal-cria-campanha')
 @endsection

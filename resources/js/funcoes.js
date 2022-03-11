@@ -3,6 +3,7 @@ window.desativaeAtivaCampanha = desativaeAtivaCampanha;
 window.deletaCulto = deletaCulto;
 window.deletaCampanha = deletaCampanha;
 window.desativaVisitante = desativaVisitante;
+window.deletaUsuario = deletaUsuario;
 
 // Desativa ou Ativa culto e campanha
 function desativaeAtivaCulto(cod_culto, status) {
@@ -134,7 +135,7 @@ function desativaVisitante(cod_pessoa) {
     })
 }
 
-function deletaCampanha(cod_campanha){
+function deletaCampanha(cod_campanha) {
     Swal.fire({
         title: 'Deletar Campanha?',
         text: "Deletar o campanha ele será removido da lista!",
@@ -167,3 +168,64 @@ function deletaCampanha(cod_campanha){
         }
     })
 }
+
+function deletaUsuario(cod_usuario) {
+    Swal.fire({
+        title: 'Deletar Usuário?',
+        text: "Deletar o usuário ele será removido da lista!",
+        type: 'error',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, prosseguir!',
+        cancelButtonText: 'Não, cancelar'
+    }).then((result) => {
+        if (result.value == true) {
+            $.ajax({
+                type: "POST",
+                url: "/deleta-usuario",
+                data: {cod_usuario: cod_usuario},
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                cache: false,
+                success: function (response) {
+                    swal(
+                        "Sucesso!",
+                        "Opereração realizado com sucesso!",
+                        "success"
+                    )
+                    //$('table').DataTable().refresh();
+                    window.location.reload()
+                }
+            });
+        }
+    })
+}
+
+$('[data-usuario]').on('click', function () {
+    var id = $('#testedoteste').prev().attr('id');
+    //var value = $(this).siblings('input').val();
+    alert(id);
+    $.ajax({
+        url: '/toggle-usuario',
+        type: 'POST',
+        data: {
+            //cod_usuario: $("#cod_usuario").val(),
+            status: $(this).prop('checked')
+        },
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function ($data) {
+            if ($(this).prop('checked') === true) {
+                $.notify('O usuário foi ativado', {type: 'success'});
+            } else {
+                $.notify('O usuário foi inativado', {type: 'danger'});
+            }
+        }
+    })
+});
+
+
+

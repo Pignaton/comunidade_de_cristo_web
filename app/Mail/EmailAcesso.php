@@ -16,9 +16,9 @@ class EmailAcesso extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($dados)
     {
-        //
+        $this->dados = $dados;
     }
 
     /**
@@ -28,6 +28,9 @@ class EmailAcesso extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.acesso.layout');
+        return $this->markdown('emails.acesso.layout')
+            ->subject($this->dados['titulo'])
+            ->to($this->dados['email'])
+            ->with('nome', $this->dados['nome']);
     }
 }

@@ -23,25 +23,27 @@
                                         data-target="#modalCriaAcesso">Criar Acesso
                                 </button>
                             </div>
-                            <table class="table" id="visitantes">
+                            <table class="table dt-responsive nowrap" style="width:100%">
                                 <thead>
                                 <tr>
+                                    <th class="text-center"></th>
                                     <th class="text-center">Nome</th>
-                                    <th>usuario</th>
-                                    <th>Email</th>
-                                    <th>Nivel de Acesso</th>
-                                    <th>Status</th>
-                                    <th>Ações</th>
+                                    <th class="text-center">usuario</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">Nivel de Acesso</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Ações</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($acessos as $acesso)
                                     <tr>
+                                        <td class="text-right"></td>
                                         <td class="text-center">{{$acesso->nome}}</td>
-                                        <td>{{$acesso->usuario}}</td>
-                                        <td>{{$acesso->email}}</td>
-                                        <td>{{$acesso->nivel}}</td>
-                                        <td>@switch($acesso->status)
+                                        <td class="text-center">{{$acesso->usuario}}</td>
+                                        <td class="text-center">{{$acesso->email}}</td>
+                                        <td class="text-center">{{$acesso->nivel}}</td>
+                                        <td class="text-center">@switch($acesso->status)
                                                 @case('A')
                                                 Ativo
                                                 @break
@@ -53,12 +55,17 @@
                                         <td class="td-actions text-right">
                                             <button type="button" rel="tooltip" class="btn btn-success btn-sm"
                                                     data-original-title="Editar Acesso" title="Editar Acesso"
-                                            data-toggle="modal" data-target="#modalAcesso{{$acesso->cod_usuario}}">
+                                                    data-toggle="modal"
+                                                    data-target="#modalAcesso{{$acesso->cod_usuario}}"
+                                                    @if(auth()->user()->cod_usuario === $acesso->cod_usuario) disabled @endif>
                                                 <i class="material-icons">edit</i>
                                                 <div class="ripple-container"></div>
                                             </button>
-                                            <button type="button" rel="tooltip" class="btn btn-danger btn-sm"
-                                                    data-original-title="Deletar" title="Deletar">
+                                            <button type="button" rel="tooltip"
+                                                    class="btn btn-danger btn-sm"
+                                                    data-original-title="Deletar" title="Deletar"
+                                                    onclick="deletaUsuario({{$acesso->cod_usuario}})"
+                                                    @if(auth()->user()->cod_usuario === $acesso->cod_usuario) disabled @endif>
                                                 <i class="material-icons">close</i>
                                                 <div class="ripple-container"></div>
                                             </button>

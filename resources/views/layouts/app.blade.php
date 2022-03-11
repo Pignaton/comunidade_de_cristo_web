@@ -19,7 +19,8 @@
     <link href="{{ asset('assets') }}/css/app.css" rel="stylesheet"/>
     <!-- CSS DataTable -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
 </head>
 <body class="{{ $class ?? '' }}">
 @if(Request::path() != 'cadastro' && auth()->check())
@@ -117,7 +118,7 @@
 <script src="{{ asset('material') }}/js/core/jquery.min.js"></script>
 <script src="{{ asset('material') }}/js/core/popper.min.js"></script>
 <script src="{{ asset('material') }}/js/core/bootstrap-material-design.min.js"></script>
-<script src="{{ asset('material') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!--<script src="{{-- asset('material') --}}/js/plugins/perfect-scrollbar.jquery.min.js"></script>-->
 
 <!-- Plugin for the momentJs  -->
 <script src="{{ asset('material') }}/js/plugins/moment.min.js"></script>
@@ -133,6 +134,8 @@
 <script src="{{ asset('material') }}/js/plugins/bootstrap-datetimepicker.min.js"></script>
 <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
 <script src="{{ asset('material') }}/js/plugins/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
 <script src="{{ asset('material') }}/js/plugins/bootstrap-tagsinput.js"></script>
 <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->

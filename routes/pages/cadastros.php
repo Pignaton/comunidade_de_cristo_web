@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Administrativo\Informacoes\InformacoesController;
 
 Route::get('/integrantes', [InformacoesController::class, 'integrantes'])->name('integrantes');
+Route::post('/toggle-usuario', [InformacoesController::class, 'toggle'])->name('toggle');
 
 Route::get('/visitantes', [InformacoesController::class, 'visitantes'])->name('visitantes');
 Route::get('/informacao-visitante/{cod_pessoa}', [InformacoesController::class, 'informacaoVisitante']);
@@ -12,5 +13,6 @@ Route::post('/desativaVisitante', [InformacoesController::class, 'desativaVisita
 
 Route::get('/acesso', [InformacoesController::class, 'acesso'])->name('acesso');
 Route::post('/cria-acesso', [InformacoesController::class, 'criaAcesso'])->name('cria-acesso');
+Route::post('/deleta-usuario', [InformacoesController::class, 'deletaUsuario'])->name('deletaUsuario');
 
 

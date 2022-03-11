@@ -20,6 +20,15 @@ Route::get('/', function () {
     return redirect('/cadastro');
 });
 
+Route::get('/mailable', function () {
+    $invoice = [
+      'nome' => 'kaleb',
+      'email' => 'kpignaton@ymail.com'
+    ];
+
+    return new App\Mail\EmailAcesso($invoice);
+});
+
 Route::get('/cadastro', [App\Http\Controllers\Administrativo\Cadastro\CadastroController::class, 'index'])->name('cadastro');
 Route::post('/cadastroPessoa', [App\Http\Controllers\Administrativo\Cadastro\CadastroController::class, 'cadastro'])->name('cadastroPessoa');
 
