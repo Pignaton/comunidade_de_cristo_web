@@ -20,7 +20,7 @@ class Integrante extends Model
         'data_nascimento'
     ];
 
-    public function enderecoIntegrante()
+    public static function enderecoIntegrante()
     {
         return DB::table('integrante as a')
             ->leftJoin('endereco_integrante as b', 'a.cod_integrante', '=', 'b.cod_integrante')

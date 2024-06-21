@@ -22,8 +22,8 @@ Route::get('/', function () {
 
 Route::get('/mailable', function () {
     $invoice = [
-      'nome' => 'kaleb',
-      'email' => 'kpignaton@ymail.com'
+        'nome' => 'kaleb',
+        'email' => 'kpignaton@ymail.com'
     ];
 
     return new App\Mail\EmailAcesso($invoice);
@@ -36,7 +36,9 @@ Auth::routes();
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
 
-Route::group(['middleware' => 'auth'], function () {
+@include('pages/linktree.php');
+
+Route::group(['middleware' => 'auth', 'prefix' => 'administrativo'], function () {
     Route::get('table-list', function () {
         return view('pages.table_list');
     })->name('table');

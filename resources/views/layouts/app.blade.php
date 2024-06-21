@@ -17,10 +17,12 @@
     <!-- CSS Files -->
     <link href="{{ asset('material') }}/css/material-dashboard.css?v=2.1.1" rel="stylesheet"/>
     <link href="{{ asset('assets') }}/css/app.css" rel="stylesheet"/>
+    @yield('style')
     <!-- CSS DataTable -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+
 </head>
 <body class="{{ $class ?? '' }}">
 @if(Request::path() != 'cadastro' && auth()->check())

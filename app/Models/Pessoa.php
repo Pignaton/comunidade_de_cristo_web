@@ -15,7 +15,7 @@ class Pessoa extends Model
     protected $primaryKey = 'cod_pessoa';
     public $timestamps = true;
 
-    public function enderecoPessoa($cod_pessoa = null)
+    public static function enderecoPessoa($cod_pessoa = null)
     {
         $query = DB::table('pessoa as p');
         $query->leftJoin('endereco as e', 'p.cod_pessoa', '=', 'e.cod_pessoa');

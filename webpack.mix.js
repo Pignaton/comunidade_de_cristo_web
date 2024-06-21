@@ -13,4 +13,7 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/assets/js')
     .vue()
-    .sass('resources/sass/app.scss', 'public/assets/css');
+    .sass('resources/sass/app.scss', 'public/assets/css')
+    .sass('resources/sass/linktree.scss', 'public/assets/css')
+    .sass('resources/sass/pagina_links.scss', 'public/assets/css')
+    .copy('resources/images', 'public/assets/images');

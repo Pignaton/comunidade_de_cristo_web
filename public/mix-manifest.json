@@ -1,4 +1,14 @@
 {
     "/assets/js/app.js": "/assets/js/app.js",
-    "/assets/css/app.css": "/assets/css/app.css"
+    "/assets/css/app.css": "/assets/css/app.css",
+    "/assets/css/pagina_links.css": "/assets/css/pagina_links.css",
+    "/assets/css/linktree.css": "/assets/css/linktree.css",
+    "/assets/images/1.jfif": "/assets/images/1.jfif",
+    "/assets/images/2.jfif": "/assets/images/2.jfif",
+    "/assets/images/3.jfif": "/assets/images/3.jfif",
+    "/assets/images/default.png": "/assets/images/default.png",
+    "/assets/images/simbolo Sinza Tranparente.png": "/assets/images/simbolo Sinza Tranparente.png",
+    "/assets/images/simbolo.png": "/assets/images/simbolo.png",
+    "/assets/images/simbolo_preto.png": "/assets/images/simbolo_preto.png",
+    "/assets/images/simbolo_roxo.png": "/assets/images/simbolo_roxo.png"
 }

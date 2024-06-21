@@ -1,0 +1,52 @@
+header {
+    background-color: #FFF;
+    padding: 0 10px;
+}
+
+header ul {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+
+header li {
+    border-bottom: 2px solid #fff;
+}
+
+header li:hover {
+    border-bottom: 2px solid #ccc;
+}
+
+header li a {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    color: #000;
+}
+
+header li.active {
+    border-bottom: 2px solid #000;
+}
+
+.container_area {
+    display: flex;
+    flex:1;
+}
+
+.container_area .container_leftside {
+   flex: 1;
+    border-right: 1px solid #ccc;
+}
+
+.container_area .container_rightside {
+    margin: 0 auto;
+}
+
+.container_area .container_rightside iframe {
+    width: 300px;
+    height: 550px;
+    border: 10px solid #000;
+    border-radius: 20px;
+    margin:20px;
+}

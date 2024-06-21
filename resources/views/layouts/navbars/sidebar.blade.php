@@ -54,6 +54,12 @@
                     <p>{{ __('Configurações do Cadastro') }}</p>
                 </a>
             </li>
+            <li class="nav-item{{ $activePage == 'pagina_de_links' ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('linktree.paginaLinks') }}">
+                    <i class="material-icons">account_tree</i>
+                    <p>{{ __('Página de links') }}</p>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

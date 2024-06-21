@@ -20,7 +20,7 @@ class Culto extends Model
         'ind_periodo'
     ];
 
-    public function listaCulto()
+    public static function listaCulto()
     {
         return Culto::where('status', 'A')->get();
     }
