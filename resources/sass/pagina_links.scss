@@ -31,11 +31,11 @@ header li.active {
 
 .container_area {
     display: flex;
-    flex:1;
+    flex: 1;
 }
 
 .container_area .container_leftside {
-   flex: 1;
+    flex: 1;
     border-right: 1px solid #ccc;
 }
 
@@ -48,7 +48,7 @@ header li.active {
     height: 550px;
     border: 10px solid #000;
     border-radius: 20px;
-    margin:20px;
+    margin: 20px;
 }
 
 .bigButton {
@@ -70,7 +70,6 @@ header li.active {
     padding: 0;
     list-style: none;
     margin: 20px;
-    width: 50%;
 }
 
 .link--item {
@@ -96,7 +95,13 @@ header li.active {
     font-weight: bold;
 }
 
+.link--item-href {
+    max-width: 40ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .link--item-button a:hover {
     text-decoration: underline;
 }
-

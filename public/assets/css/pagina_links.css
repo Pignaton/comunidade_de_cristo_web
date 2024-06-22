@@ -70,7 +70,6 @@ header li.active {
   padding: 0;
   list-style: none;
   margin: 20px;
-  width: 50%;
 }
 
 .link--item {
@@ -94,6 +93,13 @@ header li.active {
 
 .link--item-title {
   font-weight: bold;
+}
+
+.link--item-href {
+  max-width: 40ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .link--item-button a:hover {

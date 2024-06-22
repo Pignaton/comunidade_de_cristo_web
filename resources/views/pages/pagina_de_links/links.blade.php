@@ -10,7 +10,7 @@
                     <a class="bigButton btn btn-success" href="{{url('#')}}">Novo Link</a>
                     <ul id="links">
                         @foreach($links as $link)
-                            <li class="link--item" data-id="{{$link->cod_link}}">
+                            <li class="link--item" data-id="{{$link->cod_links}}">
                                 <div class="link--item-order">
                                     <i class="material-icons" alt="Ordernar" width="10%">low_priority</i>
                                 </div>
@@ -19,8 +19,8 @@
                                     <div class="link--item-href">{{$link->href}}</div>
                                 </div>
                                 <div class="link--item-bottons">
-                                    <a href="" class="link--item-title">Editar</a>
-                                    <a href="" class="link--item-href">Excluir</a>
+                                    <a href="">Editar</a>
+                                    <a href="">Excluir</a>
                                 </div>
                             </li>
                         @endforeach
@@ -33,10 +33,10 @@
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
     <script>
         new Sortable(document.querySelector('#links'),{
-            animated: 150,
+            animation: 150,
             onEnd: async(e) => {
-                let id = e.item.getAttribute('data-id');
-                let link = `{{url('administrativo/linkorder/${id}/${e.newIndex}')}}`;
+                let cod_link = e.item.getAttribute('data-id');
+                let link = `{{url('administrativo/link-ordem/${cod_link}/${e.newIndex}')}}`;
                 await fetch(link);
                 window.location.href = window.location.href;
             }

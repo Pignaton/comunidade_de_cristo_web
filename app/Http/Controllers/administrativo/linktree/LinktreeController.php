@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Administrativo\Linktree;
 
 use App\Models\Campanha;
 use App\Models\Visualizacao;
-use App\Models\Pessoa;
 use App\Models\Links;
 use App\Models\Pagina;
 use App\Providers\RouteServiceProvider;
@@ -45,7 +44,7 @@ class LinktreeController extends BaseController
                     break;
             }
 
-            $links = Links::where('status', '1')
+            $links = Links::where('status', '0')
                 ->orderBy('ordem')
                 ->get();
 
@@ -96,12 +95,54 @@ class LinktreeController extends BaseController
         ]);
     }
 
+    public function linkOrdemAtualiza($cod_link, $nova_posicao) //$cod_pagina
+    {
+        $link = Links::find($cod_link);
+
+        $myPages = [];
+        /*$myPagesQuery = Pagina::where('cod_pagina', $cod_pagina)->get();
+
+        foreach ($myPagesQuery as $pageItem) {
+            $myPages[] = $pageItem->cod_links;
+        }*/
+
+        if ($link->ordem > $nova_posicao) {
+            $afterLinks = Links::where('cod_links', $cod_link)
+                ->where('ordem', '>=', $nova_posicao)
+                ->get();
+            foreach ($afterLinks as $afterLink) {
+                $afterLink->ordem++;
+                $afterLink->save();
+            }
+        } elseif ($link->ordem < $nova_posicao) {
+            $beforeLinks = Links::where('cod_links', $cod_link)
+                ->where('ordem', '<=', $nova_posicao)
+                ->get();
+            foreach ($beforeLinks as $beforeLink) {
+                $beforeLink->ordem--;
+                $beforeLink->save();
+            }
+        }
+
+        $link->ordem = $nova_posicao;
+        $link->save();
+
+        $allLinks = Links::where('cod_pagina', $link->cod_pagina)
+            ->orderBy('orderm', 'ASC')
+            ->get();
+        foreach ($allLinks as $linkKey => $linkItem) {
+            $linkItem->ordem = $linkKey;
+            $linkItem->save();
+        }
+        return [];
+    }
+
     public function paginaDesign()
     {
         return view('pages.pagina_de_links.design', ['menu' => 'design']);
     }
 
-    public function paginaEstatiticas()
+    public function paginaEstatisticas()
     {
         return view('pages.pagina_de_links.estatistica', ['menu' => 'stats']);
     }

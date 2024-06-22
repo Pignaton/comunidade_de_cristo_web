@@ -1,22 +1,34 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <link rel="shortcut icon" href="{{ asset('assets') }}/images/favicon_io/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets') }}/images/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets') }}/images/favicon_io/favicon-16x16.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{{ asset('assets') }}/css/linktree.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </head>
-
+<!--
+           return view('pages.linktree.index', [
+                'font_color' => $pagina->op_font_color,
+                'profile_image' => url(asset('assets') . '/' . $pagina->op_profile_image),
+                'titulo' => $pagina->op_title,
+                'descricao' => $pagina->op_description,
+                'fb_pixel' => $pagina->op_fb_pixel,
+                'bg' => $bg,
+                'links' => $links,
+-->
 <body>
+
 <div>
     <div class="container container--title-image">
         <div class="col-xs-12">
             <div class="text-center" style="padding-top: 5px; padding-bottom: 30px;">
                 <img src="{{asset('assets')}}/images/simbolo.png" class="linktree">
-                <h2 style="color: #ffffff; padding-top: 20px;">Igreja Batista Comunidade de Cristo</h2>
+                <h5 style="color: #ffffff; padding-top: 20px;">{{$titulo}}</h5>
             </div>
         </div>
     </div>
-
 
     <div class="container">
         <div class="social">
@@ -39,41 +51,27 @@
         </div>
         <div class="col-xs-12">
             <div class="text-center">
-                <div style="padding-bottom: 30px;">
-                    <button onclick="location.href='{{route('linktree.agenda')}}'" type="button"
-                            class="btn btn-outline-light"
-                            style="width: 90%; padding-top:10px; padding-bottom:10px; font-weight: 600;">Confira nossa
-                        programação de @php echo getNomeMes(date('n')) @endphp </button>
-                </div>
-                <!--<div style="padding-bottom: 30px;">
-                    <button onclick="location.href='http://bit.ly/2SVZXES'" type="button" class="btn btn-outline-light" style="width: 80%; padding-top:10px; padding-bottom:10px; font-weight: 600;">Guide: Increasing Your Engagement</button>
-                </div>
-                <div style="padding-bottom: 30px;">
-                    <button onclick="location.href='#'" type="button" class="btn btn-outline-light" style="width: 80%; padding-top:10px; padding-bottom:10px; font-weight: 600;">View My YouTube Channel</button>
-                </div>
-                <div style="padding-bottom: 30px;">
-                    <button onclick="location.href='#'" type="button" class="btn btn-outline-light" style="width: 80%; padding-top:10px; padding-bottom:10px; font-weight: 600;">Connect On LinkedIn</button>
-                </div>-->
-                <div style="padding-bottom: 30px;">
-                    <button
-                        onclick="location.href='https://docs.google.com/forms/d/e/1FAIpQLSfonJjheBfz1afFORjNWBCfnksxWQAZXi9nLDrEI5m-vVJWRg/viewform'"
-                        type="button" class="btn btn-outline-light"
-                        style="width: 90%; padding-top:10px; padding-bottom:10px; font-weight: 600;">Forms Primeiro
-                        Contato
-                    </button>
-                </div>
-                <div style="padding-bottom: 30px;">
-                    <!--<button onclick="location.href='#'" type="button" class="btn btn-outline-light"
-                            style="width: 90%; padding-top:10px; padding-bottom:10px; font-weight: 600;">Inscrição MMR
-                    </button>-->
-                </div>
+                @foreach($links as $link)
+                    <div style="padding-bottom: 30px;">
+                        <button
+                            onclick="location.href='{{$link->href}}'"
+                            type="button" class="btn btn-outline-light {{$link->op_border_type}}"
+                            style="width: 100%; padding-top:10px; padding-bottom:10px; font-weight: 600;">
+                            {{$link->titulo}}
+                        </button>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>
 </div>
+
 <div class="text-center">
-    <a href="https://kalweb.com.br/" style="color: #34312f;" target="_blank">Desenvolvido por Igreja Batista Comunidade
-        de Cristo</a>
+    <small>
+        <a href="https://ibcomunidadecristo.com.br" style="color: #34312f;" target="_blank">
+            Desenvolvido por Igreja Batista Comunidade de Cristo
+        </a>
+    </small>
 </div>
 
 

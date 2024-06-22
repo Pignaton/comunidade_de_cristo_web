@@ -9,8 +9,8 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header card-header-primary">
-                            <h4 class="card-title">Dias dos Cultos</h4>
-                            <p class="card-category">Cultos da semana criados</p>
+                            <h4 class="card-title">Links</h4>
+                            <!--<p class="card-category">Cultos da semana criados</p>-->
                         </div>
                         <div class="card-body">
                             <div class="container_area">
@@ -27,7 +27,9 @@
                                     @yield('body')
                                 </div>
                                 <div class="container_rightside">
-                                    <iframe frameborder="0" src="{{url('fique-por-dentro')}}"></iframe>
+                                    <div class="video-wrapper">
+                                        <iframe frameborder="0" src="{{url('fique-por-dentro')}}"></iframe>
+                                    </div>
                                 </div>
                             </div>
                         </div>
