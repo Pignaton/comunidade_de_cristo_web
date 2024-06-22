@@ -60,6 +60,12 @@
                     <p>{{ __('Página de links') }}</p>
                 </a>
             </li>
+                <li class="nav-item{{ $activePage == 'qrcodes' ? ' active' : '' }}">
+                    <a class="nav-link" href="{{ route('qrcodes.index') }}">
+                        <i class="material-icons">qr_code_2</i>
+                        <p>{{ __('Gerar QR Codes') }}</p>
+                    </a>
+                </li>
         </ul>
     </div>
 </div>

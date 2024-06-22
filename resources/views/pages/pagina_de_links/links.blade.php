@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <a class="bigButton" href="{{url('#')}}">Novo Link</a>
+                    <a class="bigButton btn btn-success" href="{{url('#')}}">Novo Link</a>
                     <ul id="links">
                         @foreach($links as $link)
-                            <li class="link-item">
+                            <li class="link--item" data-id="{{$link->cod_link}}">
                                 <div class="link--item-order">
-                                    <img src="" alt="Ordernar" width="10%">
+                                    <i class="material-icons" alt="Ordernar" width="10%">low_priority</i>
                                 </div>
                                 <div class="link--item-info">
                                     <div class="link--item-title">{{$link->titulo}}</div>
@@ -29,4 +29,17 @@
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+    <script>
+        new Sortable(document.querySelector('#links'),{
+            animated: 150,
+            onEnd: async(e) => {
+                let id = e.item.getAttribute('data-id');
+                let link = `{{url('administrativo/linkorder/${id}/${e.newIndex}')}}`;
+                await fetch(link);
+                window.location.href = window.location.href;
+            }
+        })
+    </script>
 @endsection

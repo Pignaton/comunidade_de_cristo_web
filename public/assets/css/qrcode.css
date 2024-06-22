@@ -1,0 +1,32 @@
+.icon, .container-icon a {
+  text-decoration: none !important;
+  color: #3f345f;
+  transition: all 0.3s ease 0s;
+}
+
+.text-action:hover, a:hover {
+  color: #00b0ff;
+  cursor: pointer;
+}
+
+.icon, .container-icon {
+  display: flex;
+  align-items: center;
+}
+
+.container-icon {
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  color: #262b33;
+  pointer-events: all;
+}
+
+.icon {
+  justify-content: center;
+  color: #2196f3;
+  margin-right: 5px;
+}

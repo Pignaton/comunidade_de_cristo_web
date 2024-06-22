@@ -1,5 +1,5 @@
 body {
-    width: 100wh;
+    width: 100 wh;
     height: 90vh;
     color: #fff;
     background: linear-gradient(-45deg, #7b04e4, #9c37ec, #a35fec);
@@ -10,7 +10,9 @@ body {
     padding: 100px 20px 40px 20px;
     font-family: "Nunito Sans", sans-serif;
 }
-
+.container--title-image {
+    margin-top: -50px;
+}
 .container-card {
     display: flex;
     flex-direction: column;

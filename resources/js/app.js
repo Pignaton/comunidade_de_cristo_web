@@ -5,7 +5,7 @@
  */
 
 //require('./bootstrap');
-require('./jquery');
+//require('./jquery');
 require('./viacep');
 require('./script');
 require('./funcoes');

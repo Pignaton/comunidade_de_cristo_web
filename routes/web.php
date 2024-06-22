@@ -69,6 +69,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'administrativo'], function ()
 
     @include('pages/cadastros.php');
     @include('pages/configuracoes-de-cadastro.php');
+    @include('pages/qrcodes.php');
 });
 
 Route::group(['middleware' => 'auth'], function () {

@@ -8,9 +8,9 @@
 
 <body>
 <div>
-    <div class="container">
+    <div class="container container--title-image">
         <div class="col-xs-12">
-            <div class="text-center" style="padding-top: 30px; padding-bottom: 30px;">
+            <div class="text-center" style="padding-top: 5px; padding-bottom: 30px;">
                 <img src="{{asset('assets')}}/images/simbolo.png" class="linktree">
                 <h2 style="color: #ffffff; padding-top: 20px;">Igreja Batista Comunidade de Cristo</h2>
             </div>
@@ -63,9 +63,9 @@
                     </button>
                 </div>
                 <div style="padding-bottom: 30px;">
-                    <button onclick="location.href='#'" type="button" class="btn btn-outline-light"
+                    <!--<button onclick="location.href='#'" type="button" class="btn btn-outline-light"
                             style="width: 90%; padding-top:10px; padding-bottom:10px; font-weight: 600;">Inscrição MMR
-                    </button>
+                    </button>-->
                 </div>
             </div>
         </div>
