@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>Agenda - Julho</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets') }}/images/favicon_io/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets') }}/images/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets') }}/images/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets') }}/images/favicon_io/favicon-16x16.png">
     <link href="{{ asset('assets') }}/css/linktree.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-</head>
 
 <body>
-<div class="container">
+<div class="container-fluid">
     <div class="col-xs-12">
-        <div class="text-center" style="padding-top: 30px; padding-bottom: 30px;">
+        <div class="text-center" style="margin-top: -4rem; padding-bottom: 30px;">
             <img src="{{asset('assets')}}/images/1.jfif" class="linktree-agenda">
             <img src="{{asset('assets')}}/images/2.jfif" class="linktree-agenda">
             <img src="{{asset('assets')}}/images/3.jfif" class="linktree-agenda">

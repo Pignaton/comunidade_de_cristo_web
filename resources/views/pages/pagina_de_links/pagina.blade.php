@@ -1,5 +1,8 @@
-@extends('layouts.app', ['activePage' => 'pagina', 'titlePage' => __('Página Template')])
-@section('body')
+@extends('layouts.app', ['activePage' => 'pagina_de_links', 'titlePage' => __('Página de Links')])
+@section('style')
+    <link href="{{ asset('assets') }}/css/pagina_links.css" rel="stylesheet"/>
+@endsection
+@section('content')
     <div class="content">
         <div class="container-fluid">
             <div class="row">

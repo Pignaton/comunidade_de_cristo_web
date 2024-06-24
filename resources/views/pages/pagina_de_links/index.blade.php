@@ -17,7 +17,7 @@
                                 <div class="container_leftside">
                                     <header>
                                         <ul>
-                                            <li @if ($menu == 'links') class="active" @endif><a href="#">Links</a></li>
+                                            <li @if ($menu == 'links') class="active" @endif><a href="{{url('administrativo/pagina/links')}}">Links</a></li>
                                             <li @if ($menu == 'design') class="active" @endif><a
                                                     href="{{url('administrativo/pagina/design')}}">Aparência</a></li>
                                             <li @if ($menu == 'stats') class="active" @endif><a
