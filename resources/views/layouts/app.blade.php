@@ -6,11 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ __('Igreja Batista Comunidade de Cristo')}} - {{(!empty($title))?$title:$titlePage}}</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets') }}/images/favicon_io/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets') }}/images/favicon_io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets') }}/images/favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets') }}/images/favicon_io/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+    <link rel="shortcut icon" href="{{ asset('assets') }}/images/favicon_io/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="{{ asset('assets') }}/images/favicon_io/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets') }}/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets') }}/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets') }}/images/favicon-16x16.png">
+    <link rel="manifest" href="{{ asset('assets') }}/images/favicon_io/site.webmanifest">
+    <link rel="mask-icon" href="{{ asset('assets') }}/images/favicon_io/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
           name='viewport'/>
     <!--     Fonts and icons     -->
@@ -23,9 +27,10 @@
     <link href="{{ asset('assets') }}/css/qrcode.css" rel="stylesheet"/>
     @yield('style')
     <!-- CSS DataTable -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <!--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowreorder/1.5.0/css/rowReorder.dataTables.min.css">-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/3.0.2/css/responsive.dataTables.css">
 
 </head>
 <body class="{{ $class ?? '' }}">
@@ -139,9 +144,12 @@
 <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
 <script src="{{ asset('material') }}/js/plugins/bootstrap-datetimepicker.min.js"></script>
 <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
-<script src="{{ asset('material') }}/js/plugins/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<!--<script src="{{ asset('material') }}/js/plugins/jquery.dataTables.min.js"></script>-->
+-<script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>-
+<script src="https://cdn.datatables.net/responsive/3.0.2/js/responsive.dataTables.js"></script>
+
+<!--<script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>-->
+<script src="https://cdn.datatables.net/responsive/3.0.2/js/dataTables.responsive.min.js"></script>
 <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
 <script src="{{ asset('material') }}/js/plugins/bootstrap-tagsinput.js"></script>
 <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->

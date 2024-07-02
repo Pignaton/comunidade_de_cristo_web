@@ -8,18 +8,28 @@ Route::name('linktree.')
         Route::get('fique-por-dentro', [LinktreeController::class, 'index'])->name('index');
         Route::get('/agenda', [LinktreeController::class, 'agenda'])->name('agenda');
 
-//Admnistrativo
+        //Admnistrativo
         Route::group(['middleware' => 'auth', 'prefix' => 'administrativo'], function () {
+
             Route::get('/paginas', [LinktreeController::class, 'pagina'])->name('pagina');
-            Route::get('/pagina/links', [LinktreeController::class, 'paginaLinks'])->name('paginaLinks');
-            Route::get('/pagina/design', [LinktreeController::class, 'paginaDesign'])->name('paginaDesign');
-            Route::get('/pagina/estatisticas', [LinktreeController::class, 'paginaEstatisticas'])->name('paginaEstatisticas');
+
+            //links
+            Route::get('/pagina/links/{cod_pagina}', [LinktreeController::class, 'paginaLinks'])->name('paginaLinks');
             Route::get('/link-ordem/{cod_pagina}/{cod_link}/{nova_posicao}', [LinktreeController::class, 'linkOrdemAtualiza']);
             Route::get('/pagina/novo/links/{cod_pagina}', [LinktreeController::class, 'novoLink'])->name('novoLink');
             Route::post('/pagina/novo/links/{cod_pagina}', [LinktreeController::class, 'novoLinkAcao'])->name('novoLinkAcao');
-            /*Route::post('/desativaVisitante', [InformacoesController::class, 'desativaVisitante']);
-            Route::post('/cria-acesso', [InformacoesController::class, 'criaAcesso'])->name('cria-acesso');
-            Route::post('/deleta-usuario', [InformacoesController::class, 'deletaUsuario'])->name('deletaUsuario');
-            */
+            Route::get('/pagina/edita/link/{cod_pagina}/{cod_link}', [LinktreeController::class, 'editaLink'])->name('editaLink');
+            Route::post('/pagina/edita/link/{cod_pagina}/{cod_link}', [LinktreeController::class, 'editaLinkAcao'])->name('editaLinkAcao');
+            Route::post('/deleta/link/{cod_pagina}/{cod_link}', [LinktreeController::class, 'deletaLink'])->name('deletaLink');
+
+            //Design
+            Route::get('/pagina/design/{cod_pagina}', [LinktreeController::class, 'paginaDesign'])->name('paginaDesign');
+            //Route::get('/pagina/novo/design/{cod_pagina}', [LinktreeController::class, 'novoDesign'])->name('novoDesign');
+            Route::post('/pagina/novo/design/{cod_pagina}', [LinktreeController::class, 'novoDesignAcao'])->name('novoDesignAcao');
+            // Route::get('/pagina/edita/design/{cod_pagina}', [LinktreeController::class, 'editaLink'])->name('editaLink');
+            Route::post('/pagina/edita/design/{cod_pagina}', [LinktreeController::class, 'editaDesignAcao'])->name('editaDesignAcao');
+
+            //Estatistica
+            Route::get('/pagina/estatisticas', [LinktreeController::class, 'paginaEstatisticas'])->name('paginaEstatisticas');
         });
     });

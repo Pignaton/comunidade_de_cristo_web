@@ -105,3 +105,128 @@ header li.active {
 .link--item-button a:hover {
   text-decoration: underline;
 }
+
+.container-qrcode {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  background: white;
+  color: white;
+  z-index: 999999;
+  box-shadow: rgba(86, 86, 86, 0.08) 0px -3px 5px 0px;
+}
+
+@media (min-width: 1281px) {
+  .container-qrcode {
+    display: none !important;
+  }
+}
+/*
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px to 1280px
+*/
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .container-qrcode {
+    display: none !important;
+  }
+}
+/*
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+@media (min-width: 768px) and (max-width: 1024px) {
+  .container-qrcode {
+    display: none !important;
+  }
+}
+@media (max-width: 991px) {
+  .container_area {
+    display: block;
+  }
+
+  .colderecha {
+    display: none !important;
+  }
+
+  .solomobile {
+    display: initial !important;
+  }
+
+  .reviewmobile {
+    background: #fff;
+    flex: 100%;
+    max-width: 100%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 9999999;
+  }
+
+  .previewmobile {
+    background: #fff;
+    flex: 100%;
+    max-width: 100%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 9999999;
+  }
+
+  .link--item-href {
+    display: none;
+  }
+}
+@media (min-width: 320px) and (max-width: 480px) {
+  .container_area {
+    display: block;
+  }
+
+  .colderecha {
+    display: none !important;
+  }
+
+  .solomobile {
+    display: initial !important;
+  }
+
+  .reviewmobile {
+    background: #fff;
+    flex: 100%;
+    max-width: 100%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 9999999;
+  }
+
+  .previewmobile {
+    background: #fff;
+    flex: 100%;
+    max-width: 100%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 9999999;
+  }
+
+  .link--item-href {
+    display: none;
+  }
+}
+.previewmobile_2 {
+  height: 600px;
+  width: 330px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 20px auto 0px;
+}

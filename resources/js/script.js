@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $('table:not(.ignoreDatatable)').DataTable({
         "language": {
-            "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json",
+            "url": "https://cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json",
         },
         //"scrollX": '600',
         //"scrollY": 'auto',
@@ -16,11 +16,13 @@ $(document).ready(function () {
                 type: 'column'
             }
         },
-        columnDefs: [ {
-            className: 'dtr-control',
-            orderable: false,
-            targets:   0
-        } ],
+        columnDefs: [
+            {
+                className: 'dtr-control',
+                orderable: false,
+                targets: 0
+            },
+        ],
     });
 });
 

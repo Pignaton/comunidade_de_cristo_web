@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers\Administrativo\Linktree;
 
+
+use hisorange\BrowserDetect\Parser as Browser;
 use App\Models\Visualizacao;
+use App\Models\SiteLogAcesso;
 use App\Models\Links;
 use App\Models\Pagina;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Http\Requests\NovoLinkRequest;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 class LinktreeController extends BaseController
 {
@@ -25,78 +26,89 @@ class LinktreeController extends BaseController
 
     public function index()
     {
+        $pagina = Pagina::all()->first();
 
-        $paginas = Links::orderBy('ordem', 'ASC')->get();
+        if ($pagina) {
 
-            return view('pages.pagina_de_links.links', [
-                'menu' => 'pagina',
-                'paginas' => $paginas,
-            ]);
-        }
-
-        public function agenda()
-        {
-            return view('pages.linktree.agenda.index');
-        }
-
-        public function pagina()
-        {
-            return view('pages.pagina_de_links.index', ['menu' => 'links']);
-        }
-
-        public function paginaLinks()
-        {
-            $pagina = Pagina::all()->first();
-
-            if ($pagina) {
-
-                $bg = '#FFFFF';
-                switch ($pagina->op_bg_value) {
-                    case 'image' :
-                        $bg = "url('" . url(asset('assets')) . '/' . $pagina->op_bg_value . "')";
-                        break;
-                    case 'color' :
-                        $colors = explode(',', $pagina->op_bg_value);
-                        $bg = 'linear-gradient(90deg,';
-                        $bg .= $colors[0] . ',';
-                        $bg .= !empty($colors[1] ? $colors[1] : $colors[0]);
-                        $bg .= ')';
-                        break;
-                }
-
-                $links = Links::where('ind_status', '0')
-                    ->orderBy('ordem')
-                    ->get();
-
-                $view = Visualizacao::firstOrNew(
-                    ['cod_pagina' => $pagina->cod_pagina,
-                        'visualizacao_data' => date('Y-m-d')
-                    ]);
-
-                $view->total++;
-                $view->save();
-
-                return view('pages.linktree.index', [
-                    'font_color' => $pagina->op_font_color,
-                    'profile_image' => url(asset('assets') . '/' . $pagina->op_profile_image),
-                    'titulo' => $pagina->op_title,
-                    'descricao' => $pagina->op_description,
-                    'fb_pixel' => $pagina->op_fb_pixel,
-                    'bg' => $bg,
-                    'links' => $links,
-
-                ]);
-            } else {
-                return view('pages.404');
+            $bg = '#FFFFF';
+            switch ($pagina->op_bg_value) {
+                case 'image' :
+                    $bg = "url('" . url(asset('assets')) . 'images/background/' . $pagina->op_bg_value . "')";
+                    break;
+                case 'color' :
+                    $colors = explode(',', $pagina->op_bg_value);
+                    $bg = 'linear-gradient(-45deg,';
+                    $bg .= $colors[0] . ',';
+                    $bg .= !empty($colors[1] ? $colors[1] : $colors[0]);
+                    $bg .= ')';
+                    break;
             }
-            /*$links = Links::orderBy('ordem', 'ASC')->get();
 
-            return view('pages.pagina_de_links.links', [
-                'menu' => 'links',
-                //'page' => $page,
+            $links = Links::where('ind_status', '0')
+                ->orderBy('ordem', 'ASC')
+                ->get();
+
+            $view = Visualizacao::firstOrNew(
+                ['cod_pagina' => $pagina->cod_pagina,
+                    'visualizacao_data' => date('Y-m-d')
+                ]);
+
+            $view->total++;
+            $view->save();
+
+            $device = new SiteLogAcesso();
+            $device->cod_pagina = $pagina->cod_pagina;
+            $device->browser_name = Browser::browserName();
+            $device->device_type = Browser::deviceType();
+            $device->platform_name = Browser::platformName();
+            $device->device_model = Browser::deviceModel();
+            $device->user_agent = Browser::userAgent();
+            $device->data_acesso = date('Y-m-d H:i:s');
+            $device->save();
+
+            return view('pages.linktree.index', [
+                'font_color' => $pagina->op_font_color,
+                'profile_image' => url(asset('assets') . '/' . $pagina->op_profile_image),
+                'titulo' => $pagina->op_title,
+                'descricao' => $pagina->op_description,
+                'fb_pixel' => $pagina->op_fb_pixel,
+                'op_bg_value' =>  $pagina->op_bg_value,
+                'bg' => $bg,
                 'links' => $links,
-                'cod_pagina' => 1 //alterar para codigo dinamico
-            ]);*/
+
+            ]);
+        } else {
+            return view('pages.404');
+        }
+
+    }
+
+    public function agenda()
+    {
+        return view('pages.linktree.agenda.index');
+    }
+
+    public function pagina()
+    {
+        $paginas = Pagina::all();
+
+        return view('pages.pagina_de_links.pagina
+            ', [
+            'menu' => 'pagina',
+            'paginas' => $paginas,
+        ]);
+
+    }
+
+    public function paginaLinks($cod_pagina)
+    {
+        $links = Links::where('cod_pagina', $cod_pagina)->orderBy('ordem', 'ASC')->get();
+
+        return view('pages.pagina_de_links.links', [
+            'menu' => 'links',
+            'links' => $links,
+            'cod_pagina' => $cod_pagina
+        ]);
     }
 
     public function linkOrdemAtualiza($cod_pagina, $cod_link, $nova_posicao) //$cod_pagina
@@ -150,14 +162,16 @@ class LinktreeController extends BaseController
         if ($pagina) {
             return view('pages.pagina_de_links.pagina_edita_link', [
                 'menu' => 'links',
-                'pagina' => $pagina
+                'pagina' => $pagina,
+                'cod_pagina' => $cod_pagina
             ]);
         }
     }
 
-    public function novoLinkAcao(NovoLinkRequest $request) {
+    public function novoLinkAcao(NovoLinkRequest $request)
+    {
         $pagina = Pagina::where('cod_pagina', $request->cod_pagina)->first();
-        if($pagina) {
+        if ($pagina) {
             $totalLinks = Links::where('cod_pagina', $pagina->cod_pagina)->count();
 
             $novoLink = new Links();
@@ -171,16 +185,138 @@ class LinktreeController extends BaseController
             $novoLink->op_border_type = $request->op_border_color;
             $novoLink->save();
 
-            return redirect('/administrativo/pagina/links/'. $request->cod_pagina);
+            return redirect('/administrativo/pagina/links/' . $request->cod_pagina);
 
         } else {
             return redirect('/administrativo/paginas');
         }
     }
 
-    public function paginaDesign()
+    public function editaLink($cod_pagina, $cod_link)
     {
-        return view('pages.pagina_de_links.design', ['menu' => 'design']);
+        $pagina = Pagina::where('cod_pagina', $cod_pagina)->first();
+
+        if ($pagina) {
+            $link = Links::where('cod_pagina', $cod_pagina)->where('cod_links', $cod_link)->first();
+            if ($link) {
+                return view('pages.pagina_de_links.pagina_edita_link', [
+                    'menu' => 'links',
+                    'pagina' => $pagina,
+                    'cod_pagina' => $cod_pagina,
+                    'link' => $link
+                ]);
+            }
+
+        }
+        return view('pages.pagina_de_links.links');
+    }
+
+    public function editaLinkAcao(NovoLinkRequest $request, $cod_pagina, $cod_link)
+    {
+        $pagina = Pagina::where('cod_pagina', $cod_pagina)->first();
+
+        if ($pagina) {
+            $link = Links::where('cod_pagina', $cod_pagina)->where('cod_links', $cod_link)->first();
+            if ($link) {
+                $link->ind_status = $request->ind_status;
+                $link->titulo = $request->titulo;
+                $link->href = $request->href;
+                $link->op_bg_color = $request->op_bg_color;
+                $link->op_text_color = $request->op_text_color;
+                $link->op_border_type = $request->op_border_color;
+                $link->save();
+
+                return redirect('/administrativo/pagina/links/' . $request->cod_pagina);
+            }
+
+        } else {
+            return redirect('/administrativo/paginas');
+        }
+    }
+
+    public function deletaLink($cod_pagina, $cod_link)
+    {
+        $pagina = Pagina::where('cod_pagina', $cod_pagina)->first();
+
+        if ($pagina) {
+            $link = Links::where('cod_pagina', $cod_pagina)->where('cod_links', $cod_link)->first();
+            if ($link) {
+
+                $link->delete();
+
+                $allLinks = Links::where('cod_pagina', $link->cod_pagina)
+                    ->orderBy('ordem', 'ASC')
+                    ->get();
+                foreach ($allLinks as $linkKey => $linkItem) {
+                    $linkItem->ordem = $linkKey;
+                    $linkItem->save();
+                }
+
+                return redirect('/administrativo/pagina/links/' . $cod_pagina);
+            }
+
+        }
+        return redirect('/administrativo/paginas');
+    }
+
+    public function paginaDesign($cod_pagina)
+    {
+        //$links = Links::where('cod_pagina', $cod_pagina)->orderBy('ordem', 'ASC')->get();
+        $pagina = Pagina::where('cod_pagina', $cod_pagina)->first();
+
+        if ($pagina) {
+            return view('pages.pagina_de_links.design', [
+                'menu' => 'design',
+                'pagina' => $pagina,
+                'cod_pagina' => $cod_pagina,
+
+            ]);
+        }
+
+
+        return view('pages.pagina_de_links.pagina');
+    }
+
+    /* public function DesignLink($cod_pagina, $cod_link)
+     {
+         $pagina = Pagina::where('cod_pagina', $cod_pagina)->first();
+
+         if ($pagina) {
+             $link = Links::where('cod_pagina', $cod_pagina)->where('cod_links', $cod_link)->first();
+             if ($link) {
+                 return view('pages.pagina_de_links.pagina_edita_link', [
+                     'menu' => 'links',
+                     'pagina' => $pagina,
+                     'cod_pagina' => $cod_pagina,
+                     'link' => $link
+                 ]);
+             }
+
+         }
+         return view('pages.pagina_de_links.links');
+     }*/
+
+    public function editaDesignAcao(Request $request, $cod_pagina)
+    {
+
+        $pagina = Pagina::where('cod_pagina', $cod_pagina)->first();
+
+        if ($pagina) {
+
+            $pagina->ind_status_pagina = $request->ind_status_pagina;
+            $pagina->op_title = $request->op_title;
+            $pagina->op_description = $request->op_description;
+            $pagina->slug = $request->slug;
+            $pagina->op_bg_value = $request->op_bg_value;
+            $pagina->op_font_color = $request->op_font_color;
+            $pagina->save();
+
+            return redirect('/administrativo/pagina/design/' . $cod_pagina);
+
+
+        } else {
+            return redirect('/administrativo/paginas');
+        }
     }
 
     public function paginaEstatisticas()

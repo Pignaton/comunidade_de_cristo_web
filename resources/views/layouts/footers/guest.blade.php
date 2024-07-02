@@ -14,7 +14,7 @@
         <script>
             document.write(new Date().getFullYear())
         </script>, feito com <i class="material-icons">favorite</i> por
-        <a href="#" target="_blank">Igreja Comunidade de Cristo</a>.
+        <a href="https://ibcomunidadecristo.com.br" target="_blank">Igreja Batista Comunidade de Cristo</a>.
         </div>
     </div>
 </footer>

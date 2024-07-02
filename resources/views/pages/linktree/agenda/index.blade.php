@@ -11,7 +11,17 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets') }}/images/favicon_io/favicon-16x16.png">
     <link href="{{ asset('assets') }}/css/linktree.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-
+    <style>
+        body {
+            color: #fff;
+            background: linear-gradient(-45deg, #7b04e4, #9c37ec, #a35fec);
+            width: 100wh;
+            height: 90vh;
+            background-size: 400% 400%;
+            padding: 100px 20px 40px 20px;
+            font-family: "Nunito Sans", sans-serif;
+        }
+    </style>
 <body>
 <div class="container-fluid">
     <div class="col-xs-12">
@@ -24,7 +34,8 @@
 </div>
 
 <div class="text-center">
-    <p style="color: #ffffff; padding-top: 20px;">Igreja Batista Comunidade de Cristo <img src="{{asset('assets')}}/images/simbolo.png" width="20"/></p>
+    <p style="color: #ffffff; padding-top: 20px;">Igreja Batista Comunidade de Cristo <img
+            src="{{asset('assets')}}/images/simbolo.png" width="20"/></p>
 </div>
 
 

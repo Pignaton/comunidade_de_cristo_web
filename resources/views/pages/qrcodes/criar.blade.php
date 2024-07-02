@@ -6,47 +6,75 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header card-header-primary">
-                            <h4 class="card-title">Criar Códigos QR</h4>
+                            <h4 class="card-title">{{isset($qrcode)? 'Editar Códigos QR' : 'Criar Códigos QR'}}</h4>
                             <!--<p class="card-category">Cultos da semana criados</p>-->
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('qrcodes.salvaQrCode') }}">
+                            <form method="POST">
                                 @csrf
-                                <!-- <input type="hidden" name="cod_pessoa" id="cod_pessoa" value=""> -->
-
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                                 <div class="form-group">
                                     <label for="i_nome">Nome QR Code</label>
-                                    <input type="text" class="form-control" name="nom_code" id="i_nome" value="">
+                                    <input type="text" class="form-control" name="nom_code" id="i_nom_code"
+                                           value="{{$qrcode->nom_code ?? ''}}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="i_tipo_qrcode" class="">tipo de QR Code</label>
                                     <select class="form-control" name="tipo_qrcode" id="i_tipo_qrcode">
                                         <option value="0" disabled selected>Selecione...</option>
-                                        <option value="1">Pix</option>
-                                        <option value="2">URL de Site</option>
+                                        <option
+                                            value="1" {{isset($qrcode) ? ($qrcode->ind_tipo_code === 1 ? 'selected': '' ) : ''}}>
+                                            Pix
+                                        </option>
+                                        <option
+                                            value="2" {{isset($qrcode) ? ($qrcode->ind_tipo_code === 2 ? 'selected': '' ) : ''}}>
+                                            URL de Site
+                                        </option>
                                     </select>
                                 </div>
 
                                 <div class="form-group div_url mt-3 d-none">
                                     <label for="i_nome">URL</label>
-                                    <input type="text" class="form-control" name="dsc_url" id="i_url">
+                                    <input type="text" class="form-control" name="dsc_url" id="i_dsc_url"
+                                           value="{{$qrcode->dsc_url ?? ''}}">
                                 </div>
 
                                 <div class="form-group div_tipo_chave d-none">
                                     <label for="tipo_chave">Tipo da Chave PIX</label>
                                     <select class="form-control" name="tipo_chave" id="i_tipo_chave">
-                                        <option value="email">E-mail</option>
-                                        <option value="cpf">CPF</option>
-                                        <option value="cnpj">CNPJ</option>
-                                        <option value="celular">Celular</option>
+                                        <option value="">Selecione...</option>
+                                        <option
+                                            {{isset($qrcode) ? ($qrcode->ind_tipo_chave_pix === 'email' ? 'selected': '' ) : ''}} value="email">
+                                            E-mail
+                                        </option>
+                                        <option
+                                            {{isset($qrcode) ? ($qrcode->ind_tipo_chave_pix === 'cpf' ? 'selected': '' ) : ''}} value="cpf">
+                                            CPF
+                                        </option>
+                                        <option
+                                            {{isset($qrcode) ? ($qrcode->ind_tipo_chave_pix === 'cnpj' ? 'selected': '' ) : ''}} value="cnpj">
+                                            CNPJ
+                                        </option>
+                                        <option
+                                            {{isset($qrcode) ? ($qrcode->ind_tipo_chave_pix === 'celular' ? 'selected': '' ) : ''}} value="celular">
+                                            Celular
+                                        </option>
                                     </select>
                                 </div>
 
                                 <div class="form-group div_chave_pix d-none">
                                     <label for="i_chave_pix">&nbsp;</label>
                                     <input type="text" class="form-control" name="chave_pix" id="i_chave_pix"
-                                           placeholder="Inserir Chave pix">
+                                           placeholder="Inserir Chave pix" value="{{$qrcode->chave_pix ?? ''}}">
                                 </div>
 
 
@@ -54,9 +82,18 @@
                                     <div class="form-group">
                                         <label for="idade">Tamanho</label>
                                         <select class="form-control" name="ind_tamanho" id="i_tamanho">
-                                            <option value="small">Pequeno</option>
-                                            <option value="medium">Médio</option>
-                                            <option value="Large">Grande</option>
+                                            <option
+                                                {{isset($qrcode) ? ($qrcode->ind_tipo_code === 'small' ? 'selected': '' ) : ''}}  value="small">
+                                                Pequeno
+                                            </option>
+                                            <option
+                                                {{isset($qrcode) ? ($qrcode->ind_tipo_code === 'medium' ? 'selected': '' ) : ''}}  value="medium">
+                                                Médio
+                                            </option>
+                                            <option
+                                                {{isset($qrcode) ? ($qrcode->ind_tipo_code === 'large' ? 'selected': '' ) : ''}} value="Large">
+                                                Grande
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -66,13 +103,19 @@
                                         <input type="color"
                                                style="height: 40px; border: 0.1rem solid rgb(227, 236, 242); background: rgb(255, 255, 255); width: 100%;"
                                                class="form-control form-control-color" name="cor_fundo"
-                                               id="cor_fundo" value="">
+                                               id="cor_fundo" value="{{$qrcode->cor_de_fundo ?? '#000000'}}">
                                     </div>
                                     <div>
                                         <label for="i_ind_transparencia">Transparência</label>
                                         <select class="form-control" name="ind_transparencia" id="i_ind_transparencia">
-                                            <option value="true">Sim</option>
-                                            <option value="false">Não</option>
+                                            <option
+                                                {{isset($qrcode) ? ($qrcode->ind_transparencia === 'true' ? 'selected': '' ) : ''}} value="true">
+                                                Sim
+                                            </option>
+                                            <option
+                                                {{isset($qrcode) ? ($qrcode->ind_transparencia === 'false' ? 'selected': '' ) : ''}} value="false">
+                                                Não
+                                            </option>
                                         </select>
                                     </div>
                                     <div>
@@ -80,7 +123,8 @@
                                         <input type="color"
                                                style="height: 40px; border: 0.1rem solid rgb(227, 236, 242); background: rgb(255, 255, 255); width: 100%;"
                                                class="form-control form-control-color" name="cor_pontos"
-                                               id="cor_pontos">
+                                               id="cor_pontos"
+                                               value="{{$qrcode->cor_do_pontos ?? '#000000'}}">
                                     </div>
                                 </div>
                                 <button class="btn btn-default">Criar QrCodes</button>
@@ -106,8 +150,8 @@
 @endsection
 @push('js')
     <script>
-        $("#i_tipo_qrcode").change(function () {
-            if ($(this).val() === '1') {
+        $(document).ready(function () {
+            if ($("#i_tipo_qrcode").val() === '1') {
                 $(".div_url").addClass('d-none')
                 $(".div_tipo_chave").removeClass('d-none')
                 $(".div_chave_pix").removeClass('d-none')
@@ -116,6 +160,20 @@
                 $(".div_chave_pix").addClass('d-none')
                 $(".div_tipo_chave").addClass('d-none')
             }
+
+            $("#i_tipo_qrcode").change(function () {
+                if ($(this).val() === '1') {
+                    $(".div_url").addClass('d-none')
+                    $(".div_tipo_chave").removeClass('d-none')
+                    $(".div_chave_pix").removeClass('d-none')
+                    $("#i_dsc_url").val('');
+                } else {
+                    $(".div_url").removeClass('d-none')
+                    $(".div_chave_pix").addClass('d-none')
+                    $(".div_tipo_chave").addClass('d-none')
+                    $("#i_tipo_chave").val('');
+                }
+            })
         })
     </script>
 @endpush

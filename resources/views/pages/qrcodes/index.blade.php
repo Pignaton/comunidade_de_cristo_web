@@ -32,7 +32,7 @@
                                                         <header class="card-header text-center">
                                                     <span class="d-block my-2">
                                                         <img
-                                                            src="https://qrcode.tec-it.com/API/QRCode?color=%23{{$qrCode->cor_do_pontos}}&backcolor=%23{{$qrCode->cor_de_fundo}}&istransparent={{$qrCode->ind_transparencia}}&&size={{$qrCode->ind_tamanho}}&dpi=100&data={{urlencode($qrCode->codigo_pix)}}"
+                                                            src="https://qrcode.tec-it.com/API/QRCode?color=%23{{$qrCode->cor_do_pontos}}&backcolor=%23{{$qrCode->cor_de_fundo}}&istransparent={{$qrCode->ind_transparencia}}&&size={{$qrCode->ind_tamanho}}&dpi=100&data={{$qrCode->data_code}}"
                                                             style="cursor: initial; background-repeat: no-repeat; background-size: contain; background-position: center center; width: initial; height: 178px;">
                                                         <!-- <div class="mt-2">
                                                              <small
@@ -53,30 +53,45 @@
                                                                     Baixar
                                                                 @endif
                                                             </button>
-                                                            <div aria-labelledby="DownloadDropdown"
-                                                                 class="dropdown-menu dropdown-menu-center mt-0"
-                                                                 style="min-width: 178px !important;">
-                                                                <a href="/png-download/ybzNuH/Untitled"
-                                                                   download="Untitled"
-                                                                   class="dropdown-item text-sm"
-                                                                   style="border-bottom: none;">
-                                                                    <i class="material-icons mr-2"
-                                                                       style="padding-right: 4px; padding-left: 4px;">download</i>
-                                                                    <p> PNG</p>
-                                                                </a>
-                                                                <a href="/svg-download/ybzNuH/Untitled"
-                                                                   download="Untitled"
-                                                                   class="dropdown-item text-sm"
-                                                                   style="border-bottom: none;">
-                                                                    <i class="material-icons mr-2"
-                                                                       style="padding-right: 4px; padding-left: 4px;">download</i>
-                                                                    <p>SVG</p>
-                                                                </a>
-                                                            </div>
+
+                                                            @if($qrCode->ind_tipo_code === 2)
+                                                                <div aria-labelledby="DownloadDropdown"
+                                                                     class="dropdown-menu dropdown-menu-center mt-0"
+                                                                     style="min-width: 178px !important;">
+                                                                    <a href="https://qrcode.tec-it.com/API/QRCode?data={{$qrCode->data_code}}&color=%23{{$qrCode->cor_do_pontos}}&backcolor=%23{{$qrCode->cor_de_fundo}}&istransparent={{$qrCode->ind_transparencia}}&&size=large&dpi=100&method=download"
+                                                                       target="_self"
+                                                                       download
+                                                                       class="dropdown-item text-sm"
+                                                                       style="border-bottom: none;">
+                                                                        <p>
+                                                                            <i class="material-icons mr-2"
+                                                                               style="padding-right: 4px; padding-left: 4px;">download</i>
+                                                                            PNG</p>
+                                                                    </a>
+                                                                    <!--<a href="/svg-download/ybzNuH/Untitled"
+                                                                       download="Untitled"
+                                                                       class="dropdown-item text-sm"
+                                                                       style="border-bottom: none;">
+                                                                        <i class="material-icons mr-2"
+                                                                           style="padding-right: 4px; padding-left: 4px;">download</i>
+                                                                        <p>SVG</p>
+                                                                    </a>-->
+                                                                </div>
+                                                            @else
+                                                                <div aria-labelledby="DownloadDropdown"
+                                                                     class="dropdown-menu dropdown-menu-center mt-0"
+                                                                     style="min-width: 178px !important;">
+                                                                    <input
+                                                                        value="https://qrcode.tec-it.com/API/QRCode?data={{$qrCode->data_code}}&color=%23{{$qrCode->cor_do_pontos}}&backcolor=%23{{$qrCode->cor_de_fundo}}&istransparent={{$qrCode->ind_transparencia}}&&size=large&dpi=100&method=download"
+                                                                        id="codpix"
+                                                                        class="dropdown-item text-sm"
+                                                                        style="border-bottom: none;"/>
+                                                                </div>
+                                                            @endif
                                                             <div class="resultholder"
                                                                  style="position: absolute; left: -999em;">
                                                                 <img id="scream"
-                                                                     src="https://qrcode.tec-it.com/API/QRCode?color=%23{{$qrCode->cor_do_pontos}}&backcolor=%23{{$qrCode->cor_de_fundo}}&istransparent={{$qrCode->ind_transparencia}}&&size={{$qrCode->ind_tamanho}}&dpi=100&data={{urlencode($qrCode->codigo_pix)}}"
+                                                                     src="https://qrcode.tec-it.com/API/QRCode?color=%23{{$qrCode->cor_do_pontos}}&backcolor=%23{{$qrCode->cor_de_fundo}}&istransparent={{$qrCode->ind_transparencia}}&&size={{$qrCode->ind_tamanho}}&dpi=100&data={{$qrCode->data_code}}"
                                                                      class="img-fluid" style="width: 200px;">
                                                             </div>
                                                         </header>
@@ -98,26 +113,26 @@
                                                                                 <i class="material-icons"
                                                                                    style="padding-right: 4px; padding-left: 4px;">edit</i>
                                                                             </div>
-                                                                            <a href="/dashboard/edit-content/ybzNuH"
+                                                                            <a href="{{url('administrativo/gerador/editar/qr-code/'.$qrCode->cod_qr)}}"
                                                                                class="">
                                                                                 Editar conteúdo
                                                                             </a>
                                                                         </div>
-                                                                        <div class="container-icon">
-                                                                            <div class="icon">
-                                                                                <i class="material-icons"
-                                                                                   style="padding-right: 4px; padding-left: 4px;">palette</i>
+                                                                           <div class="container-icon">
+                                                                                <div class="icon">
+                                                                                    <i class="material-icons"
+                                                                                       style="padding-right: 4px; padding-left: 4px;">palette</i>
+                                                                                </div>
+                                                                                <a href="#">Editar
+                                                                                    cor e forma</a>
                                                                             </div>
-                                                                            <a href="/dashboard/edit-colorandshape/ybzNuH">Editar
-                                                                                cor e forma</a>
-                                                                        </div>
-                                                                        <div class="container-icon">
-                                                                            <div class="icon">
-                                                                                <i class="material-icons"
-                                                                                   style="color: rgb(10, 74, 180); padding-right: 4px; padding-left: 4px;">inventory_2</i>
+                                                                            <div class="container-icon">
+                                                                                <div class="icon">
+                                                                                    <i class="material-icons"
+                                                                                       style="color: rgb(10, 74, 180); padding-right: 4px; padding-left: 4px;">inventory_2</i>
+                                                                                </div>
+                                                                                <a>Desativar Link</a>
                                                                             </div>
-                                                                            <a>Desativar Link</a>
-                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -136,3 +151,14 @@
         </div>
     </div>
 @endsection
+
+<script>
+    document.getElementById('DownloadDropdown').addEventListener('click', execCopy);
+
+    function execCopy() {
+        document.querySelector("#codpix").select();
+        document.execCommand("copy");
+    }
+</script>
+
+

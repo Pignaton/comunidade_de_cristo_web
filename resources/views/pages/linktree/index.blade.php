@@ -10,6 +10,38 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets') }}/images/favicon_io/favicon-16x16.png">
     <link href="{{ asset('assets') }}/css/linktree.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+    <style type="text/css">
+
+        body {
+            color: {{$font_color}};
+            @if(!empty($op_bg_value))
+                        background: {{$bg}};
+            @else
+                       background: linear-gradient(-45deg, #7b04e4, #9c37ec, #a35fec);
+            @endif
+
+               width: 100 wh;
+            height: 90vh;
+            background-size: 400% 400%;
+            /*
+               -webkit-animation: Gradient 15s ease infinite;
+               -moz-animation: Gradient 15s ease infinite;
+                animation: Gradient 15s ease infinite;
+               */
+            padding: 100px 20px 40px 20px;
+            font-family: "Nunito Sans", sans-serif;
+
+        }
+
+        .linksquare {
+            border-radius: 0px;
+        }
+
+        .linkrounded {
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <!--
            return view('pages.linktree.index', [
@@ -27,8 +59,10 @@
     <div class="container container--title-image">
         <div class="col-xs-12">
             <div class="text-center" style="margin-top: -4rem; padding-bottom: 30px;">
+                <!--<img src="{{asset('assets')}}/images/slug/id/{{$profile_image}}" class="linktree">-->
                 <img src="{{asset('assets')}}/images/simbolo.png" class="linktree">
                 <h5 style="color: #ffffff; padding-top: 20px;">{{$titulo}}</h5>
+                <small style="color: #ffffff;">{{$descricao}}</small>
             </div>
         </div>
     </div>
@@ -58,7 +92,7 @@
                     <div style="padding-bottom: 30px;">
                         <button
                             onclick="location.href='{{$link->href}}'"
-                            type="button" class="btn btn-outline-light {{$link->op_border_type}}"
+                            type="button" class="btn btn-outline-light link{{$link->op_border_type}}"
                             style="width: 100%; padding-top:10px; padding-bottom:10px; font-weight: 600;">
                             {{$link->titulo}}
                         </button>

@@ -10,31 +10,33 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card-body">
-                            <table class="table" id="integrante">
+                            <table class="table dt-responsive nowrap" style="width:100%">
                                 <thead>
                                 <tr>
+                                    <th class="text-center"></th>
                                     <th class="text-center">Nome</th>
-                                    <th>Idade</th>
-                                    <th>Sexo</th>
-                                    <th>Email</th>
-                                    <th>Data de Nascimento</th>
-                                    <th>Ações</th>
+                                    <th class="text-center">Idade</th>
+                                    <th class="text-center">Sexo</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">Data de Nascimento</th>
+                                    <th class="text-center">Ações</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($integrantes as $integrante)
                                     <tr>
+                                        <td class="text-right"></td>
                                         <td class="text-center">{{$integrante->nome}}</td>
                                         <td>{{$integrante->idade}}</td>
                                         <td>@switch($integrante->ind_sexo)
                                                 @case('F')
-                                                Feminino
-                                                @break
+                                                    Feminino
+                                                    @break
                                                 @case('M')
-                                                Masculino
-                                                @break
+                                                    Masculino
+                                                    @break
                                                 @default
-                                                Não Indentificado
+                                                    Não Indentificado
                                             @endswitch
                                         </td>
                                         <td>{{$integrante->email}}</td>

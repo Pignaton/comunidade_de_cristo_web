@@ -4,13 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Pagina extends Model
+class SiteLogAcesso extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
-    protected $table = 'pages';
-    protected $primaryKey = 'cod_pagina';
+    protected $table = 'site_log_acessos';
     public $timestamps = false;
 }

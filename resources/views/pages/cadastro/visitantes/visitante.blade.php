@@ -18,9 +18,10 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card-body">
-                            <table class="table" id="visitantes">
+                            <table class="table dt-responsive nowrap " style="width: 100%">
                                 <thead>
                                 <tr>
+                                    <th>&nbsp;</th>
                                     <th class="text-center">Nome</th>
                                     <th>Idade</th>
                                     <th>Sexo</th>
@@ -31,6 +32,7 @@
                                 <tbody>
                                 @foreach($pessoas as $pessoa)
                                     <tr>
+                                        <td></td>
                                         <td class="text-center">{{$pessoa->nome}}</td>
                                         <td>{{$pessoa->idade}}</td>
                                         <td>@switch($pessoa->sexo)
@@ -53,7 +55,7 @@
                                                 <i class="material-icons">person</i>
                                                 <div class="ripple-container"></div>
                                             </button>-->
-                                            <a href="{{url('informacao-visitante', ['cod_pessoa' => $pessoa->cod_pessoa])}}"
+                                            <a href="{{url('administrativo/informacao-visitante', ['cod_pessoa' => $pessoa->cod_pessoa])}}"
                                                rel="tooltip" class="btn btn-info"
                                                data-original-title="Informações do visitante"
                                                title="Informações do visitante" class="ripple-container">

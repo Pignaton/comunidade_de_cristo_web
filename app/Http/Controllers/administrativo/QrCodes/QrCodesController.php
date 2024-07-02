@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Administrativo\QrCodes;
 
+use App\Http\Requests\NovoQrcodeRequest;
 use App\Models\QrCode;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Routing\Redirector;
 
 class QrCodesController extends BaseController
 {
@@ -23,21 +25,21 @@ class QrCodesController extends BaseController
     public function index()
     {
         $qrCodes = QrCode::all();
+
+        foreach ($qrCodes as $qrCode) {
+            if (!empty($qrCode->ind_tipo_chave_pix)) {
+                $qrCode->data_code = urlencode($qrCode->codigo_pix);
+            } else {
+                $qrCode->data_code = $qrCode->dsc_url;
+            }
+
+        }
         return view('pages.qrcodes.index', ['qrCodes' => $qrCodes]);
     }
 
-    public function editaQrCode(Request $request)
+    public function salvaQrCode(NovoQrcodeRequest $request)
     {
-        return view('pages.qrcodes.edita');
-    }
-
-    public function criarQrCode()
-    {
-        return view('pages.qrcodes.criar');
-    }
-
-    public function salvaQrCode(Request $request)
-    {
+        //dd($request->all());
         $cor_fundo = preg_replace('/#/', '', $request->cor_fundo);
         $cor_pontos = preg_replace('/#/', '', $request->cor_pontos);
 
@@ -50,16 +52,16 @@ class QrCodesController extends BaseController
         // Celular: +5511912345678 (+55 + DDD + número)
         //
         // $chave = "kpignaton@ymail.com";
-        // $url = "https://comunidadecristo.com.br/comunidade-de-cristo";
+        $url = "https://comunidadecristo.com.br/fique-por-dentro";
 
         // Valor da transação
-        $valorTransacao = 1.23;
+        $valorTransacao = 0;
 
         // Identificador único da transação, caso exista
         $idTransacao = "";
 
         // Obtem código copia e cola do PIX
-        $codigoPix = $this->geraPix($request->chave_pix, $idTransacao, $valorTransacao);
+        $codigoPix = $this->geraPix($url, $idTransacao, $valorTransacao);
 
         $qrcode = new QrCode();
 
@@ -88,6 +90,74 @@ class QrCodesController extends BaseController
             'codPix' => $codigoPix,
             'qrCodes' => $qrCodes
         ]);
+    }
+
+    public function editaQrCode($cod_qr)
+    {
+        $qrCode = QrCode::where('cod_qr', $cod_qr)->first();
+
+        if ($qrCode) {
+
+            return view('pages.qrcodes.criar', [
+                'menu' => 'qrcodes',
+                'qrcode' => $qrCode,
+                'cod_qr' => $cod_qr
+            ]);
+        }
+
+
+        return view('pages.qrcodes.index');
+    }
+
+    /**
+     * @param NovoQrcodeRequest $request
+     * @param $cod_qr
+     * @return Application|RedirectResponse|Redirector
+     * // Exemplos de chave PIX
+     * // E-mail: nome@exemplo.com.br
+     * // CPF: 12345678901 (só números)
+     * // CNPJ: 12345678000123 (só números)
+     * // Celular: +5511912345678 (+55 + DDD + número)
+     */
+    public function editaQrCodeAcao(NovoQrcodeRequest $request, $cod_qr)
+    {
+        $cor_fundo = preg_replace('/#/', '', $request->cor_fundo);
+        $cor_pontos = preg_replace('/#/', '', $request->cor_pontos);
+
+        // Valor da transação
+        $valorTransacao = 0;
+        // Identificador único da transação, caso exista
+        $idTransacao = "";
+        // Obtem código copia e cola do PIX
+        $codigoPix = $this->geraPix($request->chave_pix, $valorTransacao, $idTransacao);
+
+
+        $qrcode = QrCode::where('cod_qr', $cod_qr)->first();
+
+        if ($qrcode) {
+            $qrcode->nom_code = $request->nom_code;
+            $qrcode->ind_tipo_code = $request->tipo_qrcode;
+            $qrcode->dsc_url = $request->dsc_url;
+            $qrcode->ind_tipo_chave_pix = $request->tipo_chave;
+            $qrcode->chave_pix = $request->chave_pix;
+            $qrcode->ind_tamanho = $request->ind_tamanho;
+            $qrcode->cor_de_fundo = $cor_fundo;
+            $qrcode->ind_transparencia = $request->ind_transparencia;
+            $qrcode->cor_do_pontos = $cor_pontos;
+            $qrcode->codigo_pix = $codigoPix;
+            //$qrcode->valor_pix = $codigoPix;
+            $qrcode->save();
+
+            return redirect('/administrativo/gerador');
+
+        } else {
+            return redirect('/administrativo/gerador');
+        }
+    }
+
+    public function criarQrCode()
+    {
+        return view('pages.qrcodes.criar');
     }
 
     /**
@@ -151,14 +221,4 @@ class QrCodesController extends BaseController
         return $resultado;
     }
 
-    protected function validador(array $data)
-    {
-        return Validator::make($data, [
-            'nome' => ['required', 'string', 'max:255'],
-            'idade' => ['required', 'string', 'max:255'],
-            'culto' => ['required', 'string'],
-            'email' => ['string', 'email', 'max:255', 'unique:pessoa'],
-            'sexo' => ['required_without_all']
-        ]);
-    }
 }

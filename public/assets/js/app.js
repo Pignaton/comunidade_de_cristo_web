@@ -284,7 +284,7 @@ $('[data-usuario]').on('click', function () {
 $(document).ready(function () {
   $('table:not(.ignoreDatatable)').DataTable({
     "language": {
-      "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json"
+      "url": "https://cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json"
     },
     //"scrollX": '600',
     //"scrollY": 'auto',
@@ -410,6 +410,19 @@ $(document).ready(function () {
     }
   });
 });
+
+/***/ }),
+
+/***/ "./resources/sass/design.scss":
+/*!************************************!*\
+  !*** ./resources/sass/design.scss ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
 
 /***/ }),
 
@@ -555,7 +568,8 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 			"assets/css/app": 0,
 /******/ 			"assets/css/qrcode": 0,
 /******/ 			"assets/css/pagina_links": 0,
-/******/ 			"assets/css/linktree": 0
+/******/ 			"assets/css/linktree": 0,
+/******/ 			"assets/css/design": 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -605,11 +619,12 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["assets/css/app","assets/css/qrcode","assets/css/pagina_links","assets/css/linktree"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["assets/css/app","assets/css/qrcode","assets/css/pagina_links","assets/css/linktree"], () => (__webpack_require__("./resources/sass/app.scss")))
-/******/ 	__webpack_require__.O(undefined, ["assets/css/app","assets/css/qrcode","assets/css/pagina_links","assets/css/linktree"], () => (__webpack_require__("./resources/sass/linktree.scss")))
-/******/ 	__webpack_require__.O(undefined, ["assets/css/app","assets/css/qrcode","assets/css/pagina_links","assets/css/linktree"], () => (__webpack_require__("./resources/sass/pagina_links.scss")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["assets/css/app","assets/css/qrcode","assets/css/pagina_links","assets/css/linktree"], () => (__webpack_require__("./resources/sass/qrcode.scss")))
+/******/ 	__webpack_require__.O(undefined, ["assets/css/app","assets/css/qrcode","assets/css/pagina_links","assets/css/linktree","assets/css/design"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["assets/css/app","assets/css/qrcode","assets/css/pagina_links","assets/css/linktree","assets/css/design"], () => (__webpack_require__("./resources/sass/app.scss")))
+/******/ 	__webpack_require__.O(undefined, ["assets/css/app","assets/css/qrcode","assets/css/pagina_links","assets/css/linktree","assets/css/design"], () => (__webpack_require__("./resources/sass/linktree.scss")))
+/******/ 	__webpack_require__.O(undefined, ["assets/css/app","assets/css/qrcode","assets/css/pagina_links","assets/css/linktree","assets/css/design"], () => (__webpack_require__("./resources/sass/pagina_links.scss")))
+/******/ 	__webpack_require__.O(undefined, ["assets/css/app","assets/css/qrcode","assets/css/pagina_links","assets/css/linktree","assets/css/design"], () => (__webpack_require__("./resources/sass/qrcode.scss")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["assets/css/app","assets/css/qrcode","assets/css/pagina_links","assets/css/linktree","assets/css/design"], () => (__webpack_require__("./resources/sass/design.scss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
