@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>Agenda - Julho</title>
+    <title>Agenda - {{getNomeMes(ucfirst(date('m')))}}</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('assets') }}/images/favicon_io/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets') }}/images/favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets') }}/images/favicon_io/favicon-32x32.png">
@@ -26,16 +26,20 @@
 <div class="container-fluid">
     <div class="col-xs-12">
         <div class="text-center" style="margin-top: -4rem; padding-bottom: 30px;">
-            <img src="{{asset('assets')}}/images/1.jfif" class="linktree-agenda">
-            <img src="{{asset('assets')}}/images/2.jfif" class="linktree-agenda">
-            <img src="{{asset('assets')}}/images/3.jfif" class="linktree-agenda">
+            @foreach($files as $file)
+                <img src="{{asset($file->dsc_link_arquivo)}}" class="linktree-agenda">
+                <!--<img src="{{--asset('assets')--}}/images/1.jfif" class="linktree-agenda">
+                    <img src="{{--asset('assets')--}}/images/2.jfif" class="linktree-agenda">
+                    <img src="{{--asset('assets')--}}/images/3.jfif" class="linktree-agenda">-->
+            @endforeach
         </div>
     </div>
 </div>
 
 <div class="text-center">
-    <p style="color: #ffffff; padding-top: 20px;">Igreja Batista Comunidade de Cristo <img
-            src="{{asset('assets')}}/images/simbolo.png" width="20"/></p>
+    <p style="color: #ffffff; padding-top: 20px;">Igreja Batista Comunidade de Cristo
+        <img src="{{asset('assets')}}/images/simbolo.png" width="20"/>
+    </p>
 </div>
 
 

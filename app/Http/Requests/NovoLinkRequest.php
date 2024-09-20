@@ -28,7 +28,7 @@ class NovoLinkRequest extends FormRequest
             'ind_status' =>  'required|boolean',
             'titulo' => 'required|min:2',
             'href' => 'required|url',
-            'op_bg_color' => 'required|regex:/^[#][0-9A-F]{3,6}$/i',
+            'op_bg_color' => 'nullable|regex:/^[#][0-9A-F]{3,6}$/i',
             'op_text_color' => 'required|regex:/^[#][0-9A-F]{3,6}$/i',
             'op_border_type' => 'required', Rule::in('square', 'rounded', 'outline')
         ];

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Administrativo\Linktree;
 
 
+use App\Models\ArquivosLink;
 use hisorange\BrowserDetect\Parser as Browser;
 use App\Models\Visualizacao;
 use App\Models\SiteLogAcesso;
@@ -15,6 +16,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\DB;
 
 class LinktreeController extends BaseController
 {
@@ -24,9 +26,9 @@ class LinktreeController extends BaseController
     protected $redirectTo = RouteServiceProvider::HOME;
 
 
-    public function index()
+    public function index($slug)
     {
-        $pagina = Pagina::all()->first();
+        $pagina = Pagina::where('slug', $slug)->first();
 
         if ($pagina) {
 
@@ -44,7 +46,8 @@ class LinktreeController extends BaseController
                     break;
             }
 
-            $links = Links::where('ind_status', '0')
+            $links = Links::where('cod_pagina', $pagina->cod_pagina)
+                ->where('ind_status', '0')
                 ->orderBy('ordem', 'ASC')
                 ->get();
 
@@ -72,20 +75,37 @@ class LinktreeController extends BaseController
                 'titulo' => $pagina->op_title,
                 'descricao' => $pagina->op_description,
                 'fb_pixel' => $pagina->op_fb_pixel,
-                'op_bg_value' =>  $pagina->op_bg_value,
+                'op_bg_value' => $pagina->op_bg_value,
                 'bg' => $bg,
                 'links' => $links,
 
             ]);
         } else {
-            return view('pages.404');
+            return view('errors.404');
         }
 
     }
 
-    public function agenda()
+    public function agenda($slug)
     {
-        return view('pages.linktree.agenda.index');
+
+        $pagina = Pagina::where('slug', $slug)->first();
+
+        $files = ArquivosLink::where([
+            'nom_tabela' => 'pages',
+            'cod_pk_tabela' => $pagina->cod_pagina
+        ])->get();
+
+        foreach ($files as $file) {
+
+            $file->dsc_arquivo = $file->dsc_link_arquivo;
+
+            $file->dsc_link_arquivo = getArquivo(
+                $file->dsc_link_arquivo
+            );
+        }
+
+        return view('pages.linktree.agenda.index', ['files' => $files]);
     }
 
     public function pagina()
@@ -170,6 +190,7 @@ class LinktreeController extends BaseController
 
     public function novoLinkAcao(NovoLinkRequest $request)
     {
+
         $pagina = Pagina::where('cod_pagina', $request->cod_pagina)->first();
         if ($pagina) {
             $totalLinks = Links::where('cod_pagina', $pagina->cod_pagina)->count();
@@ -184,6 +205,7 @@ class LinktreeController extends BaseController
             $novoLink->op_text_color = $request->op_text_color;
             $novoLink->op_border_type = $request->op_border_color;
             $novoLink->save();
+
 
             return redirect('/administrativo/pagina/links/' . $request->cod_pagina);
 
@@ -213,6 +235,15 @@ class LinktreeController extends BaseController
 
     public function editaLinkAcao(NovoLinkRequest $request, $cod_pagina, $cod_link)
     {
+        $file = ArquivosLink::where(['cod_pk_tabela' => $cod_pagina, 'nom_tabela' => strtolower('pages')])->first();
+
+        if (!is_null($file)) {
+            $file->drop();
+            $file->delete();
+        }
+
+        save_file($request->applications, '', 'pages', $cod_pagina);
+
         $pagina = Pagina::where('cod_pagina', $cod_pagina)->first();
 
         if ($pagina) {
@@ -322,5 +353,37 @@ class LinktreeController extends BaseController
     public function paginaEstatisticas()
     {
         return view('pages.pagina_de_links.estatistica', ['menu' => 'stats']);
+    }
+
+    public function destroy(Request $request)
+    {
+        try {
+
+            DB::beginTransaction();
+
+            $file = \App\Models\ArquivosLink::where([
+                'dsc_link_arquivo' => $request->cod_link_arquivo,
+                'nom_tabela' => 'g_banner',
+                'cod_pk_tabela' => $request->cod_banner
+            ])->first();
+
+            if (is_null($file))
+                abort(404, 'Arquivo não encontrado!');
+
+            $file->drop();
+
+            $file->delete();
+
+            DB::commit();
+
+            return response()->json([]);
+
+        } catch (\Exception $error) {
+
+            DB::rollBack();
+
+            return responseError($error, 'Ops...');
+
+        }
     }
 }

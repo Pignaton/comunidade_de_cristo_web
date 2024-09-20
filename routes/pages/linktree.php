@@ -5,8 +5,8 @@ use App\Http\Controllers\Administrativo\Linktree\LinktreeController;
 
 Route::name('linktree.')
     ->group(function () {
-        Route::get('fique-por-dentro', [LinktreeController::class, 'index'])->name('index');
-        Route::get('/agenda', [LinktreeController::class, 'agenda'])->name('agenda');
+        Route::get('/{slug}', [LinktreeController::class, 'index'])->name('index');
+        Route::get('{slug}/agenda', [LinktreeController::class, 'agenda'])->name('agenda');
 
         //Admnistrativo
         Route::group(['middleware' => 'auth', 'prefix' => 'administrativo'], function () {

@@ -1,6 +1,7 @@
 @extends('pages.pagina_de_links.index', ['activePage' => 'pagina', 'titlePage' => __('Página de Design')])
 @section('style')
     <link href="{{ asset('assets') }}/css/pagina_links.css" rel="stylesheet"/>
+    <link href="{{ asset('assets') }}/css/design.css" rel="stylesheet"/>
 @endsection
 @section('body')
     <div class="content">
@@ -10,7 +11,7 @@
                     <h4 class="card-title">{{isset($link)? 'Editar Link - ' . $link->titulo  : 'Criar Novo Link'}}</h4>
                     <p class="card-category"></p>
                 </div>
-                <form method="POST">
+                <form method="POST"  enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-md-12">
@@ -50,12 +51,13 @@
                                                value="{{$link->href ?? ''}}">
                                     </div>
 
-
+                                    <!--
                                     <div class="col-md-12">
                                         <label for="op_bg_color" class="mt-2">Cor de Fundo</label>
                                         <input type="color" class="form-control" id="op_bg_color" name="op_bg_color"
-                                               value="{{$link->op_bg_color ?? '#FFFFFF'}}">
+                                               value="{{--$link->op_bg_color ?? '#FFFFFF'--}}">
                                     </div>
+                                    -->
                                     <div class="col-md-12">
                                         <label for="op_text_color">Cor do Texto</label>
                                         <input type="color" class="form-control" id="op_text_color"
@@ -83,12 +85,12 @@
                                     </div>
                                     @if($link->cod_links === 1)
                                         <div class="col-md-12 mt-3" js-file-manager>
+                                            <legend class="file-input__label">Imagem</legend>
                                             <fieldset class="file-input">
-                                                <legend class="file-input__label">Imagem</legend>
                                                 <label class="file-input__real" hidden aria-hidden="true">
-                                                    <!--  accept=".json" -->
-                                                    <input type="file" id="applications" class="form-control"
-                                                           js-real-file-input>
+
+                                                    <input type="file" id="applications" name="applications" class="form-control"
+                                                           js-real-file-input accept="image/*">
                                                 </label>
                                                 <div class="file-input__input input input__container">
                                                           <span class="input__left">
@@ -111,7 +113,7 @@
                                         </div>
                                     @endif
 
-                                    <div class="col-md-12 ">
+                                    <div class="col-md-12">
                                         <label for="btnSalvar">&nbsp;</label>
                                         <button type="submit" id="btnSalvar" class="form-control btn btn-success">
                                             Salvar
@@ -152,6 +154,90 @@
                 $('.previewmobile').css('display', 'none');
             })
 
+            const fileManager = document.querySelector('[js-file-manager]');
+
+            class FileManager {
+                static chipTemplate = (text, id) => {
+                    return `
+                  <span id="${id}" class="chip">
+                    <span class="chip__text">${text}</span>
+                  </span>`;
+                }
+
+                static generateId = () => {
+                    const randomId = (Math.random() * 0xFFFFFF << 0).toString(16);
+
+                    return `chip-${randomId}`;
+                }
+
+                constructor(containerElement) {
+                    this._containerElement = containerElement;
+                    this._fakeInput = this._containerElement.querySelector('[js-fake-file-input]');
+                    this._realInput = this._containerElement.querySelector('[js-real-file-input]');
+                    this._chipContainer = this._containerElement.querySelector('[js-chip-container]');
+                    this._noFile = this._containerElement.querySelector('[js-no-file]');
+                    this._removeFilesButton = this._containerElement.querySelector('[js-remove-files]');
+
+                    this._files = [];
+
+                    this._addEventListeners();
+                }
+
+                _addEventListeners = () => {
+                    this._fakeInput.addEventListener('click', this._handleFakeInputClick, false);
+                    this._realInput.addEventListener('change', this._handleRealInputChange, false);
+                    this._removeFilesButton.addEventListener('click', this._handleRemoveFilesButtonClick, false);
+                }
+
+                _handleFakeInputClick = () => {
+                    if (this._chipContainer.querySelectorAll('.chip').length > 0) {
+                        this._removeChips();
+                    }
+
+                    this._realInput.click();
+                }
+
+                _handleRealInputChange = (e) => {
+                    if (this._realInput.files.length > 0) {
+                        this._toggleNoFile();
+                        [...this._realInput.files].forEach(file => {
+                            const name = file.name;
+                            const id = FileManager.generateId();
+                            const chipTemplate = FileManager.chipTemplate(name, id);
+
+                            this._chipContainer.insertAdjacentHTML('beforeend', chipTemplate);
+
+                            const chip = this._chipContainer.querySelector(`#${id}`);
+
+                            const filesObj = {name, id, chip};
+
+                            this._files.push(filesObj);
+                        })
+                    }
+                }
+
+                _handleRemoveFilesButtonClick = (e) => {
+                    if (this._realInput.files.length) {
+                        this._removeChips();
+                    }
+                }
+
+                _removeChips = () => {
+                    const chips = [...this._chipContainer.querySelectorAll('.chip')];
+                    this._toggleNoFile();
+                    this._files = [];
+                    this._chipContainer.innerHTML = '';
+                    this._realInput.value = '';
+                }
+
+                _toggleNoFile = () => {
+                    this._noFile.hidden = !this._noFile.hidden;
+                    this._removeFilesButton.hidden = !this._removeFilesButton.hidden;
+                }
+            }
+
+            const fileManagerReference = new FileManager(fileManager);
+        </script>
     @endpush
 @endsection
 
